@@ -65,12 +65,10 @@ int main(void) {
 		//After Data transfer Complete begin Calculation of new Values
 		if (Transfer_Complete_Flag) {
 			for (int i = 0; i < I2S_BUFFERSIZE / 2; i++) {
-				int32_t VCO1_Waveshaped_Sample = Waveshape_Modulation(VCO1);
+				int32_t VCO1_Waveshaped_Sample = Waveshape_Modulation(VCO1);//Calculates Waveshape Modulation
 				int32_t VCO2_Waveshaped_Sample = Waveshape_Modulation(VCO2);
-				VCO1.Output_Buffer[i] = Mix_Modulation(VCO1_Waveshaped_Sample,VCO2_Waveshaped_Sample,VCO1.Mix_Value);//(int16_t) FIXED_TO_INT(FIXED_MUL(temp1, INT_TO_FIXED(1)-VCO1.Mix_Value)+FIXED_MUL(temp2, VCO1.Mix_Value)); //crossfading the two tables
-				VCO2.Output_Buffer[i] = Mix_Modulation(VCO1_Waveshaped_Sample,VCO2_Waveshaped_Sample,VCO1.Mix_Value);//(int16_t) FIXED_TO_INT(FIXED_MUL(temp1, INT_TO_FIXED(1)-VCO1.Mix_Value)+FIXED_MUL(temp2, VCO1.Mix_Value));//Mix_Modulation(VCO1_Waveshaped_Sample,VCO2_Waveshaped_Sample,VCO1.Mix_Value);//(int16_t) FIXED_TO_INT(FIXED_MUL(temp2, INT_TO_FIXED(1)-VCO2.Mix_Value)+FIXED_MUL(temp1, VCO2.Mix_Value)); //crossfading the two tables
-				//VCO1.Output_Buffer[i] = Subtable_Interpolation(VCO1.Phase_Accumulator, VCO1.Octave_Index,Table_Triangle_Wave, TABLE_SIZE); //Linear_Interpolation(VCO1.Phase_Accumulator,Table_Saw_Wave[(int16_t)Int_Octave_Index],TABLE_SIZE);//////Copy new values
-				//VCO2.Output_Buffer[i] = Subtable_Interpolation(VCO2.Phase_Accumulator, VCO2.Octave_Index,Table_Saw_Wave, TABLE_SIZE); //Linear_Interpolation(VCO2.Phase_Accumulator,Table_Saw_Wave[(int16_t)Int_Octave_Index],TABLE_SIZE);//Copy new values
+				VCO1.Output_Buffer[i] = Mix_Modulation(VCO1_Waveshaped_Sample,VCO2_Waveshaped_Sample,VCO1.Mix_Value);//Calculates Mix Modulation
+				VCO2.Output_Buffer[i] = Mix_Modulation(VCO1_Waveshaped_Sample,VCO2_Waveshaped_Sample,VCO1.Mix_Value);//
 				VCO1.Phase_Accumulator = VCO1.Phase_Accumulator + VCO1.Phase_Shift;
 				VCO2.Phase_Accumulator = VCO2.Phase_Accumulator + VCO2.Phase_Shift;
 				if ((VCO1.Phase_Accumulator) >= Fixed_Table_Size)
