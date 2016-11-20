@@ -87,6 +87,7 @@ void inputProcessingInit(void)
 /**
  * This function gets executed when the Timer 7 sents an Interrupt, it debounces the Keys and evaluates them
  */
+/*
 void TIM7_IRQHandler(void)
 {
 	static struct keyState inputKeys[5];
@@ -115,13 +116,13 @@ void TIM7_IRQHandler(void)
 	 }
 	 inputKeys[i].lastState = inputKeys[i].actualState;
 	}
-
+*/
 	/*holdActive = inputKeys[0].gotPressed ^ holdActive;														//If Key was pressed Toggle State
 	linlogActive = inputKeys[1].gotPressed ^ linlogActive;
 	out2Active = inputKeys[2].gotPressed ^ out2Active;
 	out1Active = inputKeys[3].gotPressed ^ out1Active;
 	recActive = inputKeys[4].gotPressed ^ recActive;*/
-
+/*
 	//Function-Part to debounce and evaluate the increment sensor
 	incrementGiver.actualStateA8 = GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_8);										//Read the actual input states of the increment sensor
 	incrementGiver.actualStateC8 = GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_8);
@@ -138,25 +139,25 @@ void TIM7_IRQHandler(void)
 			incrementGiver.timeCount = 10;																		//if it is turned right a higher bank is choosed
 			if(incrementGiver.actualStateC8 == 1)
 			{
-				if(bankValue > 0)																				//Possible bank values 0-99
+				if(Bank_Value > 0)																				//Possible bank values 0-99
 				{
 					//bankValue--;
 				}
 				else
 				{
-					bankValue = 99;
+					Bank_Value = 99;
 				}
 				//sevenSegmentIntToDisplay(bankValue)															//Changed Bankvalue gets displayed on seven segment display
 			}
 			else
 			{
-				if(bankValue < 99)
+				if(Bank_Value < 99)
 				{
 					//bankValue++;
 				}
 				else
 				{
-					bankValue = 0;
+					Bank_Value = 0;
 				}
 				//sevenSegmentIntToDisplay(bankValue)
 			}
@@ -202,4 +203,4 @@ void TIM7_IRQHandler(void)
 	incrementKey.lastState = incrementKey.actualState;
 
 	TIM_ClearITPendingBit(TIM7, TIM_IT_Update);																	//Clear Interrupt Flag
-}
+}*/

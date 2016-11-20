@@ -347,8 +347,8 @@ void DMA1_Stream5_IRQHandler(void){
 	if(DMA_GetITStatus(DMA1_Stream5,DMA_IT_HTIF5)){//Half transmission complete
 		int j = 0;
 		for(int i = 0; i<I2S_BUFFERSIZE/2;i+=2,j++){//Iterate over half I2S Buffersize
-			i2s_Out[i] = VCO2.Output_Buffer[j];//-32768;//Copy Output Buffer Channel1
-			i2s_Out[i+1] = VCO1.Output_Buffer[j];//-32768;//Copy Output Buffer Channel2
+			i2s_Out[i] = VCO2_Output_Buffer[j];//-32768;//Copy Output Buffer Channel1
+			i2s_Out[i+1] = VCO1_Output_Buffer[j];//-32768;//Copy Output Buffer Channel2
 		}
 		DMA_ClearITPendingBit(DMA1_Stream5,DMA_IT_HTIF5); // Clear HalfTransfer Complete Flag
 	 }
@@ -364,8 +364,8 @@ void DMA1_Stream5_IRQHandler(void){
 		//Copy second half of Output Buffer to I2S Buffer after full transfer complete
 		int j = I2S_BUFFERSIZE/4;
 		for(int i = I2S_BUFFERSIZE/2; i<I2S_BUFFERSIZE;i+=2,j++){
-			i2s_Out[i] = VCO2.Output_Buffer[j];//-32768;
-			i2s_Out[i+1] = VCO1.Output_Buffer[j];//-32768;
+			i2s_Out[i] = VCO2_Output_Buffer[j];//-32768;
+			i2s_Out[i+1] = VCO1_Output_Buffer[j];//-32768;
 		}
 		DMA_ClearITPendingBit(DMA1_Stream5,DMA_IT_TCIF5); // Clear Transfer Complete Flag
 		Transfer_Complete_Flag=1;//Set Transfer finished Flag for polling in main function

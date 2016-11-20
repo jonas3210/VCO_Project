@@ -23,6 +23,7 @@
 #include "fixed_point.h"
 #include <math.h>
 #include "sevenSegment.h"
+#include <stdbool.h>
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/

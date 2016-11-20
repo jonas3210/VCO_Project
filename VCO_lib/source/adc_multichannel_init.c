@@ -11,6 +11,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "adc_multichannel_init.h"
+#include "debounceKey.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -116,19 +117,73 @@ void ADC1_Poti_Init(void){
 	ADC_DMACmd(ADC1, ENABLE);//Enable DMA for ADC1
 	ADC_Cmd(ADC1, ENABLE);//Enable ADC1
 
-
-	//Calibration
-	/*ADC_ResetCalibration(ADC1);
-	while(ADC_GetResetCalibrationStatus(ADC1));// Wait until reset finished
-	ADC_StartCalibration(ADC1);//Start Calibration
-	while(ADC_GetCalibrationStatus(ADC1));//wait until calibration is complete
-	*/
 	ADC_SoftwareStartConv(ADC1);
 }
+
+//*******************************************************************
+/**
+ * @brief  Function refreshes ADC Values if Threshold is reached
+ * @param  none
+ * @retval none
+ */
 void Get_ADC_Values(void){
 	for(int i=0; i<CHANNEL_AMOUNT;i++){
-		if(fabs((ADC_Buffer[i]>>4)-ADC_Values[i])>ADC_VALUE_CHANGE_THRESHOLD){
+		ADC_Differences[i]= fabs((ADC_Buffer[i]>>4)-ADC_Values[i]);
+		if(ADC_Differences[i]>ADC_VALUE_CHANGE_THRESHOLD){
 			ADC_Values[i]=(ADC_Buffer[i]>>4);
 		}
+	}
+}
+
+//*******************************************************************
+/**
+ * @brief  Function refreshes Lock values of Pots: If ADC-Value reaches LOCK_TRESHOLD Lock will be disabled
+ * @param  ParameterLock VCO_Temp_Lock: Struct with actual Lock status
+ * @retval struct of lock values
+ */
+Parameter_Lock Get_Lock_Values(Parameter_Lock VCO_Temp_Lock){
+	for(int i=0; i<CHANNEL_AMOUNT;i++){
+		if(ADC_Differences[i]>LOCK_THRESHOLD){
+			switch(i){
+			case 0: VCO_Temp_Lock.Phase_Lock = false;
+					break;
+			case 1: VCO_Temp_Lock.Audio_Lock = false;
+					break;
+			case 2: VCO_Temp_Lock.Shape_Lock = false;
+					break;
+			case 3: VCO_Temp_Lock.Mix_Lock = false;
+					break;
+			case 4: VCO_Temp_Lock.FM_Lock = false;
+					break;
+			case 5: VCO_Temp_Lock.Freq_Fine_Lock = false;
+					break;
+			case 6: VCO_Temp_Lock.Freq_Lock = false;
+					break;
+			default: break;
+			}
+		}
+	}
+	return VCO_Temp_Lock;
+}
+
+//*******************************************************************
+/**
+ * @brief  Function calculates floating mean Value of ADC Input Values
+ * @param  none
+ * @retval none
+ */
+void Get_Mean_Values(void){
+	int32_t Temp_Mean_Value;
+	int16_t Temp_ADC_Buffer;
+	for(int j = 0; j<CHANNEL_AMOUNT;j++){
+		for(int i = MEAN_SIZE;i>=0;i--){
+			int16_t Temp_Input = Input_Mean_Buffer[j][i];
+			Input_Mean_Buffer[j][i+1] = Temp_Input;
+			Temp_Mean_Value += Temp_Input;
+		}
+		Temp_ADC_Buffer = ADC_Buffer[j];
+		Input_Mean_Buffer[j][0] = Temp_ADC_Buffer;
+		Temp_Mean_Value += Temp_ADC_Buffer;
+		ADC_Mean_Values[j] = (int16_t)(Temp_Mean_Value>>4);
 	}
 }

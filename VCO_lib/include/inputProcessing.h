@@ -16,8 +16,8 @@
 #include "stm32f4xx_tim.h"
 #include "misc.h"
 #include <stdbool.h>
-#include "global.h"
 #include "sevenSegment.h"
+#include "Global_Variables.h"
 
 /*-------------------------------Exported variables-----------------------------*/
 struct keyState												//Structure that contains the variables that are needed to debounce a key
