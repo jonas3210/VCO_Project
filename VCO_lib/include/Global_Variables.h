@@ -76,4 +76,5 @@ volatile int16_t i2s_Out[I2S_BUFFERSIZE];//I2S Output Buffer
 volatile uint8_t Transfer_Complete_Flag;//Flag for I2S Transmission finished -> Start point of wave calculation
 
 volatile uint8_t Bank_Value;//Actual Bank Value
+
 #endif /* __GLOBAL_VARIABLES_H */

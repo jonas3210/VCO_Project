@@ -33,6 +33,7 @@ struct incrementState										//Structure that contains the variables that are 
 {
  bool isActivated;											//Key is activated(if there is a function to enable/disable it)
  bool lastStateA8;											//Last state(pressed/unpressed)
+ bool lastStateC8;
  bool actualStateA8;										//Actual state A8
  bool actualStateC8;										//Actual state C8
  int timeCount;												//Time that the increment sensor is locked
@@ -48,13 +49,17 @@ struct incrementKeyState									//Structure that contains the variables for the
  int timeHolded;											//Time the key was pressed
 };
 
+volatile bool holdActive;
+volatile bool linlogActive;
+volatile bool out1Active;
+volatile bool out2Active;
+volatile bool recActive;
 /*-------------------------------Exported macro---------------------------------*/
-//#define holdActive		gloablVariable					//hold active
-//#define linlogActive	gloablVariable						//lin or log mode active
-//#define out2Active		gloablVariable					//Output-Line 2 active
-//#define out1Active		gloablVariable					//Output-Line 1 active
-//#define recActive		gloablVariable						//rec mode active
-//#define bankValue											//Actual selected bank
+#define INPUT_BUTTON_HOLD holdActive
+#define INPUT_BUTTON_LINLOG linlogActive
+#define INPUT_BUTTON_OUT1 out1Active
+#define INPUT_BUTTON_OUT2 out2Active
+#define INPUT_BUTTON_REC recActive
 #define timeToSave 1000										//Time that the increment Key needs to be pressed to safe the actual settings to the displayed bank
 
 /*-----------------------------Exported functions-------------------------------*/

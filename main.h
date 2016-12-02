@@ -18,12 +18,12 @@
 #include <stm32f4xx_rcc.h>
 #include "adc_multichannel_init.h"
 #include "codec_configuration.h"
-#include"debounceKey.h"
 #include "wavetables.h"
 #include "fixed_point.h"
 #include <math.h>
 #include "sevenSegment.h"
 #include <stdbool.h>
+#include <inputProcessing.h>
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/

@@ -40,7 +40,7 @@ int main(void) {
 	codec_Configuration(); // Codec Init for Audio Transfer
 	codec_DMA_Init(); // DMA Init for I2S Communication
 
-	debounceKeyInit();//Debounce routine Init
+	inputProcessingInit();//Debounce routine Init
 	//sevenSegmentInit();
 
 	const int32_t Fixed_Table_Size = INT_TO_FIXED(TABLE_SIZE);
