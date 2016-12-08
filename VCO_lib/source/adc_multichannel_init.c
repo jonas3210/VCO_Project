@@ -118,6 +118,12 @@ void ADC1_Poti_Init(void){
 	ADC_Cmd(ADC1, ENABLE);//Enable ADC1
 
 	ADC_SoftwareStartConv(ADC1);
+
+	for(int i = 0; i<CHANNEL_AMOUNT; i++){
+		for(int j = 0; j<MEAN_SIZE; j++){
+			Input_Mean_Buffer[i][j]=0;
+		}
+	}
 }
 
 //*******************************************************************
@@ -176,7 +182,7 @@ void Get_Mean_Values(void){
 	int32_t Temp_Mean_Value;
 	int16_t Temp_ADC_Buffer;
 	for(int j = 0; j<CHANNEL_AMOUNT;j++){
-		for(int i = MEAN_SIZE;i>=0;i--){
+		for(int i = MEAN_SIZE-2;i>=0;i--){
 			int16_t Temp_Input = Input_Mean_Buffer[j][i];
 			Input_Mean_Buffer[j][i+1] = Temp_Input;
 			Temp_Mean_Value += Temp_Input;

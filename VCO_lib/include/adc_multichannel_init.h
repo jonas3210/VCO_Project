@@ -42,13 +42,13 @@
 #define INPUT_WAVESHAPE_MEAN_VALUE ADC_Mean_Values[2]
 
 #define ADC_VALUE_CHANGE_THRESHOLD 32 //Defines noise Level of Inputs for stable ADC Values
-#define LOCK_THRESHOLD 32//Defines necessary value change for unlock parameter
+#define LOCK_THRESHOLD 35//Defines necessary value change for unlock parameter
 //Amount of ADC-Channels
 #define CHANNEL_AMOUNT 7
 
 #define ADC_RESOLUTION 4096
 
-#define MEAN_SIZE 2 //Number of Values for floating mean
+#define MEAN_SIZE 16 //Number of Values for floating mean
 
 volatile uint16_t Input_Mean_Buffer[CHANNEL_AMOUNT][MEAN_SIZE];
 

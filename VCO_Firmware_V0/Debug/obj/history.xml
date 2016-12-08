@@ -1,74 +1,74 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\workspace\VCO_Firmware_V0\VCO_lib\include -I..\..\..\workspace -I..\..\..\workspace\VCO_Firmware_V0\VCO_lib -I..\..\..\workspace\VCO_Firmware_V0\cmsis_lib -I..\..\.. -I..\..\..\workspace\VCO_Firmware_V0 -I..\..\..\workspace\VCO_Firmware_V0\cmsis_boot -I..\..\..\workspace\VCO_Firmware_V0\semihosting -I..\..\..\workspace\VCO_Firmware_V0\cmsis -I..\..\..\workspace\VCO_Firmware_V0\cmsis_lib\include">
-      <target file="inputProcessing.o" lastModified="15882c10e5b">
+      <target file="inputProcessing.o" lastModified="158e0011a2d">
          <source file="..\..\..\VCO_lib\source\inputProcessing.c" lastModified="1586475914b"/>
       </target>
-      <target file="stm32f4xx_exti.o" lastModified="1587e82d44e">
+      <target file="stm32f4xx_exti.o" lastModified="158c16ac93e">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_exti.c" lastModified="1585fb849cd"/>
       </target>
-      <target file="stm32f4xx_gpio.o" lastModified="1587e82cd89">
+      <target file="stm32f4xx_gpio.o" lastModified="158c16ac524">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="1585fb849ce"/>
       </target>
-      <target file="debounceKey.o" lastModified="1587e82d13a">
-         <source file="..\..\..\VCO_lib\source\debounceKey.c" lastModified="1585fb849b1"/>
+      <target file="debounceKey.o" lastModified="158c182e167">
+         <source file="..\..\..\VCO_lib\source\debounceKey.c" lastModified="158c17ff3ea"/>
       </target>
-      <target file="startup_stm32f4xx.o" lastModified="1587e82c20a">
+      <target file="startup_stm32f4xx.o" lastModified="158c16abd13">
          <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="1585fb849b9"/>
       </target>
-      <target file="stm32f4xx_tim.o" lastModified="1587e82d7de">
+      <target file="stm32f4xx_tim.o" lastModified="158c16acb8e">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_tim.c" lastModified="1585fb849d4"/>
       </target>
-      <target file="stm32f4xx_adc.o" lastModified="1587e82cabf">
+      <target file="stm32f4xx_adc.o" lastModified="158c16ac39a">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_adc.c" lastModified="1585fb849cb"/>
       </target>
-      <target file="printf.o" lastModified="1587e82cbbb">
+      <target file="printf.o" lastModified="158c16ac429">
          <source file="..\..\..\stdio\printf.c" lastModified="1585fb849d8"/>
       </target>
-      <target file="system_stm32f4xx.o" lastModified="1587e82ce88">
+      <target file="system_stm32f4xx.o" lastModified="158c16ac5c6">
          <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="1585fb849c0"/>
       </target>
-      <target file="misc.o" lastModified="1587e82d51d">
+      <target file="misc.o" lastModified="158c16ac9b7">
          <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="1585fb849ca"/>
       </target>
-      <target file="stm32f4xx_dma.o" lastModified="1587e82d05c">
+      <target file="stm32f4xx_dma.o" lastModified="158c16ac710">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_dma.c" lastModified="1585fb849cd"/>
       </target>
-      <target file="stm32f4xx_spi.o" lastModified="1587e82d24c">
+      <target file="stm32f4xx_spi.o" lastModified="158c16ac829">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_spi.c" lastModified="1585fb849d2"/>
       </target>
-      <target file="sevenSegment.o" lastModified="1587e82cc9d">
+      <target file="sevenSegment.o" lastModified="158c16ac4a4">
          <source file="..\..\..\VCO_lib\source\sevenSegment.c" lastModified="1585fb849b3"/>
       </target>
-      <target file="stm32f4xx_rcc.o" lastModified="1587e82c89e">
+      <target file="stm32f4xx_rcc.o" lastModified="158c16ac272">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="1585fb849d1"/>
       </target>
-      <target file="stm32f4xx_pwr.o" lastModified="1587e82c06f">
+      <target file="stm32f4xx_pwr.o" lastModified="158c16abc2c">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_pwr.c" lastModified="1585fb849d0"/>
       </target>
-      <target file="stm32f4xx_dac.o" lastModified="1587e82c164">
+      <target file="stm32f4xx_dac.o" lastModified="158c16abcb8">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_dac.c" lastModified="1585fb849cc"/>
       </target>
-      <target file="sh_cmd.o" lastModified="1587e82cdb9">
+      <target file="sh_cmd.o" lastModified="158c16ac540">
          <source file="..\..\..\semihosting\sh_cmd.s" lastModified="1585fb849d7"/>
       </target>
-      <target file="syscalls.o" lastModified="1587e82cf5c">
+      <target file="syscalls.o" lastModified="158c16ac66c">
          <source file="..\..\..\syscalls\syscalls.c" lastModified="1585fb849d9"/>
       </target>
-      <target file="stm32f4xx_i2c.o" lastModified="1587e82d36e">
+      <target file="stm32f4xx_i2c.o" lastModified="158c16ac8c7">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_i2c.c" lastModified="1585fb849cf"/>
       </target>
-      <target file="adc_multichannel_init.o" lastModified="15882c10f14">
-         <source file="..\..\..\VCO_lib\source\adc_multichannel_init.c" lastModified="15882c0f21f"/>
+      <target file="adc_multichannel_init.o" lastModified="158e0011acb">
+         <source file="..\..\..\VCO_lib\source\adc_multichannel_init.c" lastModified="158c1f2e5ed"/>
       </target>
-      <target file="semihosting.o" lastModified="1587e82bdf2">
+      <target file="semihosting.o" lastModified="158c16abb09">
          <source file="..\..\..\semihosting\semihosting.c" lastModified="1585fb849d6"/>
       </target>
-      <target file="codec_configuration.o" lastModified="15882c108fe">
+      <target file="codec_configuration.o" lastModified="158e0011513">
          <source file="..\..\..\VCO_lib\source\codec_configuration.c" lastModified="1587e854030"/>
       </target>
-      <target file="main.o" lastModified="15882c8a806">
-         <source file="..\..\..\main.c" lastModified="15882c89658"/>
+      <target file="main.o" lastModified="158e0011998">
+         <source file="..\..\..\main.c" lastModified="158c2306299"/>
       </target>
    </processor>
 </history>

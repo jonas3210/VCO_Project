@@ -19,6 +19,7 @@ int16_t Mix_Modulation(int32_t Sample1, int32_t Sample2, int32_t Mix_Value);
 void LED_Init(void);
 void LED_Button_Test(void);
 void VCO_Lock_Init(void);
+void Increment_Encoder_Test(void);
 /* main function--------------------------------------------------------------*/
 /**
  *
@@ -44,40 +45,49 @@ int main(void) {
 	//sevenSegmentInit();
 
 	const int32_t Fixed_Table_Size = INT_TO_FIXED(TABLE_SIZE);
-
+	VCO1.Phase_Difference = 0;
+	VCO2.Phase_Difference = 0;
 	while (1) {
 		LED_Button_Test();
 		Get_ADC_Values();
-		//Get_Mean_Values();//Not working!! Too time intensive?!
+		//Increment_Encoder_Test();
+		Get_Mean_Values();//Not working!! Too time intensive?!
+
 		if(INPUT_BUTTON_OUT1){
 			VCO1_Lock = Get_Lock_Values(VCO1_Lock);// Get Lock status of Pots
 			if((INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256))<0)INPUT_FREQUENCY_FINE_VALUE=2048;//limit lowest Frequency to avoid arbitrary behaviour
 			if((INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256))>4095)INPUT_FREQUENCY_FINE_VALUE=2048;//limit highest Frequency to avoid arbitrary behaviour
 			if(!VCO1_Lock.Freq_Lock & VCO1_Lock.Freq_Fine_Lock){
-				VCO1.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_VALUE) * CV_FACTOR_2)*4); //Refresh Coarse Phase scaling for 1V/Octave CV
+				VCO1.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_VALUE) * CV_FACTOR_2)*2); //Refresh Coarse Phase scaling for 1V/Octave CV
 				VCO1.Octave_Index = DOUBLE_TO_FIXED((INPUT_FREQUENCY_COARSE_VALUE)/409.5);
 			}
 			//TODO: seperate Fine Freq Calculation from Coarse Calculation
 			if(!VCO1_Lock.Freq_Fine_Lock){
-				VCO1.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256)) * CV_FACTOR_2)*4); //REfresh Coarse and fine Phase scaling for 1V/Octave CV
+				VCO1.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256)) * CV_FACTOR_2)*2); //REfresh Coarse and fine Phase scaling for 1V/Octave CV
 				VCO1.Octave_Index = DOUBLE_TO_FIXED((INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256))/409.5);
 			}
-
+			if(FIXED_TO_DOUBLE(VCO1.Octave_Index)<0)VCO1.Octave_Index = 0;
 			if(!VCO1_Lock.Mix_Lock){//refresh mix value (0...1)
 				VCO1.Mix_Value = DOUBLE_TO_FIXED(INPUT_MIX_VALUE/4095.0);
 			}
 			if(!VCO1_Lock.Shape_Lock){//Refresh shape Value(0...3)
 				VCO1.Shape_Value = DOUBLE_TO_FIXED(INPUT_WAVESHAPE_VALUE/1365.0);
 			}
-			//TODO: Frequency dependent Phase_Offset Calculation
 			if(!VCO1_Lock.Phase_Lock){//refresh Phase Offset
 				int32_t Old_Phase_Value = VCO1.Phase_Mod_Value;
-				VCO1.Phase_Mod_Value = DOUBLE_TO_FIXED(INPUT_PHASE_VALUE>>2);
+				VCO1.Phase_Mod_Value = DOUBLE_TO_FIXED(INPUT_PHASE_VALUE>>1);
 				if(Old_Phase_Value != VCO1.Phase_Mod_Value){
-					VCO1.Phase_Accumulator += (VCO1.Phase_Mod_Value-Old_Phase_Value);
+					VCO1.Phase_Difference = VCO1.Phase_Difference + (VCO1.Phase_Mod_Value-Old_Phase_Value);
+				}
+				if(FIXED_TO_INT(VCO1.Phase_Difference)>0){
+					VCO1.Phase_Difference -=DOUBLE_TO_FIXED(PHASE_MODULATION_DELAY);
+					VCO1.Phase_Accumulator+=DOUBLE_TO_FIXED(PHASE_MODULATION_DELAY);
+				}
+				if(FIXED_TO_INT(VCO1.Phase_Difference)<0){
+					VCO1.Phase_Difference+=DOUBLE_TO_FIXED(PHASE_MODULATION_DELAY);
+					VCO1.Phase_Accumulator-=DOUBLE_TO_FIXED(PHASE_MODULATION_DELAY);
 				}
 			}
-
 		}
 		else{ //Lock all Pot Values when Select-Button is off
 			VCO1_Lock.Audio_Lock = true;
@@ -93,11 +103,11 @@ int main(void) {
 			if((INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256))<0)INPUT_FREQUENCY_FINE_VALUE=2048;//limit lowest Frequency to avoid arbitrary behaviour
 			if((INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256))>4095)INPUT_FREQUENCY_FINE_VALUE=2048;//limit highest Frequency to avoid arbitrary behaviour
 			if(!VCO2_Lock.Freq_Lock & VCO2_Lock.Freq_Fine_Lock){
-				VCO2.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_VALUE) * CV_FACTOR_2)*4); //Phase scaling for 1V/Octave CV
+				VCO2.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_VALUE) * CV_FACTOR_2)*2); //Phase scaling for 1V/Octave CV
 				VCO2.Octave_Index = DOUBLE_TO_FIXED((INPUT_FREQUENCY_COARSE_VALUE)/409.5);
 			}
 			if(!VCO2_Lock.Freq_Fine_Lock){
-				VCO2.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256)) * CV_FACTOR_2)*4); //Refresh Coarse Phase scaling for 1V/Octave CV
+				VCO2.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256)) * CV_FACTOR_2)*2); //Refresh Coarse Phase scaling for 1V/Octave CV
 				VCO2.Octave_Index = DOUBLE_TO_FIXED((INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256))/409.5);
 			}
 			if(!VCO2_Lock.Mix_Lock){//refresh mix value (0...1)
@@ -109,10 +119,18 @@ int main(void) {
 			//TODO: Frequency dependent Phase_Offset Calculation
 			if(!VCO2_Lock.Phase_Lock){//refresh Phase Offset
 				int32_t Old_Phase_Value = VCO2.Phase_Mod_Value;
-				VCO2.Phase_Mod_Value = DOUBLE_TO_FIXED(INPUT_PHASE_VALUE>>2);
-				if(Old_Phase_Value != VCO2.Phase_Mod_Value){
-					VCO2.Phase_Accumulator += (VCO2.Phase_Mod_Value-Old_Phase_Value);
-				}
+					VCO2.Phase_Mod_Value = DOUBLE_TO_FIXED(INPUT_PHASE_VALUE>>1);
+					if(Old_Phase_Value != VCO1.Phase_Mod_Value){
+						VCO2.Phase_Difference = VCO2.Phase_Difference + (VCO2.Phase_Mod_Value-Old_Phase_Value);
+					}
+					if(FIXED_TO_INT(VCO2.Phase_Difference)>0){
+						VCO2.Phase_Difference -=DOUBLE_TO_FIXED(PHASE_MODULATION_DELAY);
+						VCO2.Phase_Accumulator+=DOUBLE_TO_FIXED(PHASE_MODULATION_DELAY);
+					}
+					if(FIXED_TO_INT(VCO2.Phase_Difference)<0){
+						VCO2.Phase_Difference+=DOUBLE_TO_FIXED(PHASE_MODULATION_DELAY);
+						VCO2.Phase_Accumulator-=DOUBLE_TO_FIXED(PHASE_MODULATION_DELAY);
+					}
 			}
 		}
 		else{//Lock all Pot Values when Select-Button is off
@@ -182,8 +200,9 @@ int32_t Subtable_Interpolation(int32_t Accumulator,int32_t Ocatve_Index,
 	int32_t Fractual_Part = FIXED_FRACTION_PART(Ocatve_Index); //get fraction part
 	int32_t Low_Subtable_Sample =
 			INT_TO_FIXED(Linear_Interpolation(Accumulator,Tables[Integer_Part],TABLE_SIZE)); //Interpolate lower subtable
-	int32_t High_Subtable_Sample =
-			INT_TO_FIXED(Linear_Interpolation(Accumulator,Tables[Integer_Part+1],TABLE_SIZE)); //Interpolate higher subtable
+	int32_t High_Subtable_Sample;
+	if(Integer_Part<SUBTABLE_SIZE-2)High_Subtable_Sample = INT_TO_FIXED(Linear_Interpolation(Accumulator,Tables[Integer_Part+1],TABLE_SIZE)); //Interpolate higher subtable
+	else High_Subtable_Sample = 	Low_Subtable_Sample;
 	return (FIXED_MUL(Low_Subtable_Sample, INT_TO_FIXED(1)-Fractual_Part)+FIXED_MUL(High_Subtable_Sample, Fractual_Part)); //crossfading the two tables
 	//!!!!!!!!!< To do: improvement of crossfading, maybe use somehow logarithmic scale
 }
@@ -307,6 +326,21 @@ void LED_Button_Test(void) {
 		LED_REC_ON;
 	} else {
 		LED_REC_OFF;
+	}
+}
+
+void Increment_Encoder_Test(void){
+	if(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_8)){
+		LED_SAVE_ON;
+	}
+	else{
+		LED_SAVE_OFF;
+	}
+	if(GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_8)){
+		LED_LOAD_ON;
+	}
+	else{
+		LED_LOAD_OFF;
 	}
 }
 
