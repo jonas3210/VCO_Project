@@ -179,17 +179,18 @@ Parameter_Lock Get_Lock_Values(Parameter_Lock VCO_Temp_Lock){
  * @retval none
  */
 void Get_Mean_Values(void){
-	int32_t Temp_Mean_Value;
-	int16_t Temp_ADC_Buffer;
+	int32_t Temp_Mean_Value = 0;
+	int16_t Temp_ADC_Buffer = 0;
 	for(int j = 0; j<CHANNEL_AMOUNT;j++){
 		for(int i = MEAN_SIZE-2;i>=0;i--){
 			int16_t Temp_Input = Input_Mean_Buffer[j][i];
 			Input_Mean_Buffer[j][i+1] = Temp_Input;
 			Temp_Mean_Value += Temp_Input;
 		}
-		Temp_ADC_Buffer = ADC_Buffer[j];
+		Temp_ADC_Buffer = ADC_Values[j];
 		Input_Mean_Buffer[j][0] = Temp_ADC_Buffer;
 		Temp_Mean_Value += Temp_ADC_Buffer;
-		ADC_Mean_Values[j] = (int16_t)(Temp_Mean_Value>>4);
+		ADC_Mean_Values[j] = (int16_t)(Temp_Mean_Value>>7);
+		Temp_Mean_Value = 0;
 	}
 }

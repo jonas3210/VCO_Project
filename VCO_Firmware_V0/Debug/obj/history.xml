@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\workspace\VCO_Firmware_V0\VCO_lib\include -I..\..\..\workspace -I..\..\..\workspace\VCO_Firmware_V0\VCO_lib -I..\..\..\workspace\VCO_Firmware_V0\cmsis_lib -I..\..\.. -I..\..\..\workspace\VCO_Firmware_V0 -I..\..\..\workspace\VCO_Firmware_V0\cmsis_boot -I..\..\..\workspace\VCO_Firmware_V0\semihosting -I..\..\..\workspace\VCO_Firmware_V0\cmsis -I..\..\..\workspace\VCO_Firmware_V0\cmsis_lib\include">
-      <target file="inputProcessing.o" lastModified="158e0011a2d">
+      <target file="inputProcessing.o" lastModified="158eb6fb014">
          <source file="..\..\..\VCO_lib\source\inputProcessing.c" lastModified="1586475914b"/>
       </target>
       <target file="stm32f4xx_exti.o" lastModified="158c16ac93e">
@@ -37,8 +37,8 @@
       <target file="stm32f4xx_spi.o" lastModified="158c16ac829">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_spi.c" lastModified="1585fb849d2"/>
       </target>
-      <target file="sevenSegment.o" lastModified="158c16ac4a4">
-         <source file="..\..\..\VCO_lib\source\sevenSegment.c" lastModified="1585fb849b3"/>
+      <target file="sevenSegment.o" lastModified="158e577ed69">
+         <source file="..\..\..\VCO_lib\source\sevenSegment.c" lastModified="158e5532cbe"/>
       </target>
       <target file="stm32f4xx_rcc.o" lastModified="158c16ac272">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="1585fb849d1"/>
@@ -58,17 +58,17 @@
       <target file="stm32f4xx_i2c.o" lastModified="158c16ac8c7">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_i2c.c" lastModified="1585fb849cf"/>
       </target>
-      <target file="adc_multichannel_init.o" lastModified="158e0011acb">
-         <source file="..\..\..\VCO_lib\source\adc_multichannel_init.c" lastModified="158c1f2e5ed"/>
-      </target>
       <target file="semihosting.o" lastModified="158c16abb09">
          <source file="..\..\..\semihosting\semihosting.c" lastModified="1585fb849d6"/>
       </target>
-      <target file="codec_configuration.o" lastModified="158e0011513">
-         <source file="..\..\..\VCO_lib\source\codec_configuration.c" lastModified="1587e854030"/>
+      <target file="adc_multichannel_init.o" lastModified="158eb6fb161">
+         <source file="..\..\..\VCO_lib\source\adc_multichannel_init.c" lastModified="158eb6c0380"/>
       </target>
-      <target file="main.o" lastModified="158e0011998">
-         <source file="..\..\..\main.c" lastModified="158c2306299"/>
+      <target file="codec_configuration.o" lastModified="158eb6fa83b">
+         <source file="..\..\..\VCO_lib\source\codec_configuration.c" lastModified="158e4b3c0ae"/>
+      </target>
+      <target file="main.o" lastModified="158eb775542">
+         <source file="..\..\..\main.c" lastModified="158eb774914"/>
       </target>
    </processor>
 </history>

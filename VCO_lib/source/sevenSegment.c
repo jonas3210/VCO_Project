@@ -43,6 +43,9 @@ void sevenSegmentInit(void)
 	  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
 	  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	  GPIO_Init(GPIOD, &GPIO_InitStructure);
+
+		sevenSegmentReset;
+		sevenSegmentTwoDisplayTwo;
 }
 
 /**
@@ -54,7 +57,7 @@ void sevenSegmentIntToDisplay(int intToDisplay)
 
 	intToDisplaySegOne = (int) (intToDisplay/10);
 	intToDisplaySegTwo = intToDisplay-(intToDisplaySegOne*10);
-
+	sevenSegmentReset;
 	switch(intToDisplaySegOne)
 	{
 		case 0:		sevenSegmentOneDisplayZero;

@@ -359,7 +359,7 @@ void DMA1_Stream5_IRQHandler(void){
 		Transfer_complete_counter++;
 		if(Transfer_complete_counter >= 11){//Toggle LED approx. every second
 			Transfer_complete_counter = 0;
-			GPIO_ToggleBits(GPIOD,GPIO_Pin_12);
+			//GPIO_ToggleBits(GPIOD,GPIO_Pin_12);
 		}
 		//Copy second half of Output Buffer to I2S Buffer after full transfer complete
 		int j = I2S_BUFFERSIZE/4;

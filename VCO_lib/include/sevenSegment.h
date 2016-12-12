@@ -15,70 +15,70 @@
 #include <stm32f4xx_rcc.h>
 
 /*-------------------------------Exported macro --------------------------------*/
-#define sevenSegmentTwoDisplayZero 	GPIO_SetBits(GPIOB,GPIO_Pin_15);GPIO_SetBits(GPIOB,GPIO_Pin_13);GPIO_SetBits(GPIOE,GPIO_Pin_14);\
-									GPIO_SetBits(GPIOB,GPIO_Pin_12);GPIO_SetBits(GPIOB,GPIO_Pin_14);GPIO_SetBits(GPIOD,GPIO_Pin_9);
+#define sevenSegmentTwoDisplayZero 	GPIO_ResetBits(GPIOB,GPIO_Pin_15);GPIO_ResetBits(GPIOD,GPIO_Pin_9);GPIO_ResetBits(GPIOB,GPIO_Pin_14);\
+									GPIO_ResetBits(GPIOD,GPIO_Pin_11);GPIO_ResetBits(GPIOE,GPIO_Pin_14);GPIO_ResetBits(GPIOB,GPIO_Pin_12);
 
-#define sevenSegmentTwoDisplayOne  	GPIO_SetBits(GPIOB,GPIO_Pin_13);GPIO_SetBits(GPIOE,GPIO_Pin_14);
+#define sevenSegmentTwoDisplayOne  	GPIO_ResetBits(GPIOE,GPIO_Pin_14);GPIO_ResetBits(GPIOD,GPIO_Pin_11);
 
-#define sevenSegmentTwoDisplayTwo  	GPIO_SetBits(GPIOB,GPIO_Pin_15);GPIO_SetBits(GPIOB,GPIO_Pin_13);GPIO_SetBits(GPIOD,GPIO_Pin_11);\
-									GPIO_SetBits(GPIOB,GPIO_Pin_14);GPIO_SetBits(GPIOB,GPIO_Pin_12);
+#define sevenSegmentTwoDisplayTwo  	GPIO_ResetBits(GPIOD,GPIO_Pin_9);GPIO_ResetBits(GPIOB,GPIO_Pin_13);GPIO_ResetBits(GPIOD,GPIO_Pin_11);\
+									GPIO_ResetBits(GPIOB,GPIO_Pin_14);GPIO_ResetBits(GPIOB,GPIO_Pin_12);
 
-#define sevenSegmentTwoDisplayThree	GPIO_SetBits(GPIOB,GPIO_Pin_15);GPIO_SetBits(GPIOB,GPIO_Pin_13);GPIO_SetBits(GPIOD,GPIO_Pin_11);\
-									GPIO_SetBits(GPIOE,GPIO_Pin_14);GPIO_SetBits(GPIOB,GPIO_Pin_12);
+#define sevenSegmentTwoDisplayThree	GPIO_ResetBits(GPIOD,GPIO_Pin_9);GPIO_ResetBits(GPIOB,GPIO_Pin_13);GPIO_ResetBits(GPIOD,GPIO_Pin_11);\
+									GPIO_ResetBits(GPIOE,GPIO_Pin_14);GPIO_ResetBits(GPIOB,GPIO_Pin_12);
 
-#define sevenSegmentTwoDisplayFour	GPIO_SetBits(GPIOD,GPIO_Pin_9);GPIO_SetBits(GPIOD,GPIO_Pin_11);GPIO_SetBits(GPIOB,GPIO_Pin_13);\
-									GPIO_SetBits(GPIOE,GPIO_Pin_14);
+#define sevenSegmentTwoDisplayFour	GPIO_ResetBits(GPIOB,GPIO_Pin_15);GPIO_ResetBits(GPIOD,GPIO_Pin_11);GPIO_ResetBits(GPIOB,GPIO_Pin_13);\
+									GPIO_ResetBits(GPIOE,GPIO_Pin_14);
 
-#define sevenSegmentTwoDisplayFive	GPIO_SetBits(GPIOB,GPIO_Pin_15);GPIO_SetBits(GPIOD,GPIO_Pin_9);GPIO_SetBits(GPIOD,GPIO_Pin_11);\
-									GPIO_SetBits(GPIOE,GPIO_Pin_14);GPIO_SetBits(GPIOB,GPIO_Pin_12);
+#define sevenSegmentTwoDisplayFive	GPIO_ResetBits(GPIOB,GPIO_Pin_15);GPIO_ResetBits(GPIOD,GPIO_Pin_9);GPIO_ResetBits(GPIOB,GPIO_Pin_13);\
+									GPIO_ResetBits(GPIOE,GPIO_Pin_14);GPIO_ResetBits(GPIOB,GPIO_Pin_12);
 
-#define sevenSegmentTwoDisplaySix	GPIO_SetBits(GPIOB,GPIO_Pin_15);GPIO_SetBits(GPIOD,GPIO_Pin_9);GPIO_SetBits(GPIOB,GPIO_Pin_14);\
-									GPIO_SetBits(GPIOD,GPIO_Pin_11);GPIO_SetBits(GPIOE,GPIO_Pin_14);GPIO_SetBits(GPIOB,GPIO_Pin_12);
+#define sevenSegmentTwoDisplaySix	GPIO_ResetBits(GPIOB,GPIO_Pin_15);GPIO_ResetBits(GPIOD,GPIO_Pin_9);GPIO_ResetBits(GPIOB,GPIO_Pin_14);\
+									GPIO_ResetBits(GPIOB,GPIO_Pin_13);GPIO_ResetBits(GPIOE,GPIO_Pin_14);GPIO_ResetBits(GPIOB,GPIO_Pin_12);
 
-#define sevenSegmentTwoDisplaySeven	GPIO_SetBits(GPIOB,GPIO_Pin_15);GPIO_SetBits(GPIOB,GPIO_Pin_13);GPIO_SetBits(GPIOE,GPIO_Pin_14);
+#define sevenSegmentTwoDisplaySeven	GPIO_ResetBits(GPIOD,GPIO_Pin_9);GPIO_ResetBits(GPIOE,GPIO_Pin_14);GPIO_ResetBits(GPIOD,GPIO_Pin_11);
 
-#define sevenSegmentTwoDisplayEight	GPIO_SetBits(GPIOB,GPIO_Pin_15);GPIO_SetBits(GPIOB,GPIO_Pin_13);GPIO_SetBits(GPIOE,GPIO_Pin_14);\
-									GPIO_SetBits(GPIOB,GPIO_Pin_12);GPIO_SetBits(GPIOB,GPIO_Pin_14);GPIO_SetBits(GPIOD,GPIO_Pin_9); \
-									GPIO_SetBits(GPIOD,GPIO_Pin_11);
-
-#define sevenSegmentTwoDisplayNine	GPIO_SetBits(GPIOB,GPIO_Pin_15);GPIO_SetBits(GPIOB,GPIO_Pin_13);GPIO_SetBits(GPIOE,GPIO_Pin_14);\
-									GPIO_SetBits(GPIOD,GPIO_Pin_9);GPIO_SetBits(GPIOD,GPIO_Pin_11);GPIO_SetBits(GPIOB,GPIO_Pin_12);
-
-#define sevenSegmentOneDisplayZero 	GPIO_SetBits(GPIOE,GPIO_Pin_13);GPIO_SetBits(GPIOE,GPIO_Pin_11);GPIO_SetBits(GPIOD,GPIO_Pin_10);\
-									GPIO_SetBits(GPIOD,GPIO_Pin_12);GPIO_SetBits(GPIOD,GPIO_Pin_14);GPIO_SetBits(GPIOE,GPIO_Pin_15);
-
-#define sevenSegmentOneDisplayOne  	GPIO_SetBits(GPIOE,GPIO_Pin_11);GPIO_SetBits(GPIOD,GPIO_Pin_10);
-
-#define sevenSegmentOneDisplayTwo  	GPIO_SetBits(GPIOE,GPIO_Pin_13);GPIO_SetBits(GPIOE,GPIO_Pin_11);GPIO_SetBits(GPIOB,GPIO_Pin_11);\
-									GPIO_SetBits(GPIOE,GPIO_Pin_15);GPIO_SetBits(GPIOD,GPIO_Pin_12);
-
-#define sevenSegmentOneDisplayThree	GPIO_SetBits(GPIOE,GPIO_Pin_13);GPIO_SetBits(GPIOE,GPIO_Pin_11);GPIO_SetBits(GPIOB,GPIO_Pin_11);\
-									GPIO_SetBits(GPIOD,GPIO_Pin_10);GPIO_SetBits(GPIOD,GPIO_Pin_12);
-
-#define sevenSegmentOneDisplayFour	GPIO_SetBits(GPIOE,GPIO_Pin_15);GPIO_SetBits(GPIOE,GPIO_Pin_11);GPIO_SetBits(GPIOB,GPIO_Pin_11);\
-									GPIO_SetBits(GPIOD,GPIO_Pin_10);
-
-#define sevenSegmentOneDisplayFive	GPIO_SetBits(GPIOE,GPIO_Pin_13);GPIO_SetBits(GPIOE,GPIO_Pin_15);GPIO_SetBits(GPIOB,GPIO_Pin_11);\
-									GPIO_SetBits(GPIOD,GPIO_Pin_10);GPIO_SetBits(GPIOD,GPIO_Pin_12);
-
-#define sevenSegmentOneDisplaySix	GPIO_SetBits(GPIOE,GPIO_Pin_15);GPIO_SetBits(GPIOB,GPIO_Pin_11);GPIO_SetBits(GPIOD,GPIO_Pin_10);\
-									GPIO_SetBits(GPIOD,GPIO_Pin_12);GPIO_SetBits(GPIOD,GPIO_Pin_14);
-
-#define sevenSegmentOneDisplaySeven	GPIO_SetBits(GPIOE,GPIO_Pin_13);GPIO_SetBits(GPIOE,GPIO_Pin_11);GPIO_SetBits(GPIOD,GPIO_Pin_10);
-
-#define sevenSegmentOneDisplayEight	GPIO_SetBits(GPIOE,GPIO_Pin_13);GPIO_SetBits(GPIOE,GPIO_Pin_11);GPIO_SetBits(GPIOD,GPIO_Pin_10);\
-									GPIO_SetBits(GPIOD,GPIO_Pin_12);GPIO_SetBits(GPIOD,GPIO_Pin_14);GPIO_SetBits(GPIOE,GPIO_Pin_15);\
-									GPIO_SetBits(GPIOB,GPIO_Pin_11);
-
-#define sevenSegmentOneDisplayNine	GPIO_SetBits(GPIOE,GPIO_Pin_13);GPIO_SetBits(GPIOE,GPIO_Pin_11);GPIO_SetBits(GPIOD,GPIO_Pin_10);\
-									GPIO_SetBits(GPIOD,GPIO_Pin_12);GPIO_SetBits(GPIOE,GPIO_Pin_15);GPIO_SetBits(GPIOB,GPIO_Pin_11);
-
-#define sevenSegmentReset			GPIO_ResetBits(GPIOE,GPIO_Pin_11);GPIO_ResetBits(GPIOE,GPIO_Pin_13);GPIO_ResetBits(GPIOE,GPIO_Pin_15);\
-									GPIO_ResetBits(GPIOB,GPIO_Pin_13);GPIO_ResetBits(GPIOE,GPIO_Pin_14);GPIO_ResetBits(GPIOB,GPIO_Pin_12);\
-									GPIO_ResetBits(GPIOB,GPIO_Pin_14);GPIO_ResetBits(GPIOD,GPIO_Pin_9);GPIO_ResetBits(GPIOB,GPIO_Pin_11);\
-									GPIO_ResetBits(GPIOD,GPIO_Pin_11);GPIO_ResetBits(GPIOD,GPIO_Pin_10);GPIO_ResetBits(GPIOD,GPIO_Pin_12);\
-									GPIO_ResetBits(GPIOD,GPIO_Pin_14);GPIO_ResetBits(GPIOE,GPIO_Pin_15);GPIO_ResetBits(GPIOB,GPIO_Pin_15);\
+#define sevenSegmentTwoDisplayEight	GPIO_ResetBits(GPIOB,GPIO_Pin_15);GPIO_ResetBits(GPIOB,GPIO_Pin_13);GPIO_ResetBits(GPIOE,GPIO_Pin_14);\
+									GPIO_ResetBits(GPIOB,GPIO_Pin_12);GPIO_ResetBits(GPIOB,GPIO_Pin_14);GPIO_ResetBits(GPIOD,GPIO_Pin_9); \
 									GPIO_ResetBits(GPIOD,GPIO_Pin_11);
+
+#define sevenSegmentTwoDisplayNine	GPIO_ResetBits(GPIOB,GPIO_Pin_15);GPIO_ResetBits(GPIOB,GPIO_Pin_13);GPIO_ResetBits(GPIOE,GPIO_Pin_14);\
+									GPIO_ResetBits(GPIOD,GPIO_Pin_9);GPIO_ResetBits(GPIOD,GPIO_Pin_11);GPIO_ResetBits(GPIOB,GPIO_Pin_12);
+
+#define sevenSegmentOneDisplayZero 	GPIO_ResetBits(GPIOE,GPIO_Pin_13);GPIO_ResetBits(GPIOD,GPIO_Pin_10);GPIO_ResetBits(GPIOB,GPIO_Pin_11);\
+									GPIO_ResetBits(GPIOE,GPIO_Pin_15);GPIO_ResetBits(GPIOD,GPIO_Pin_12);GPIO_ResetBits(GPIOD,GPIO_Pin_14);
+
+#define sevenSegmentOneDisplayOne  	GPIO_ResetBits(GPIOB,GPIO_Pin_11);GPIO_ResetBits(GPIOD,GPIO_Pin_10);
+
+#define sevenSegmentOneDisplayTwo  	GPIO_ResetBits(GPIOE,GPIO_Pin_15);GPIO_ResetBits(GPIOB,GPIO_Pin_11);GPIO_ResetBits(GPIOE,GPIO_Pin_11);\
+									GPIO_ResetBits(GPIOD,GPIO_Pin_14);GPIO_ResetBits(GPIOD,GPIO_Pin_12);
+
+#define sevenSegmentOneDisplayThree	GPIO_ResetBits(GPIOE,GPIO_Pin_15);GPIO_ResetBits(GPIOB,GPIO_Pin_11);GPIO_ResetBits(GPIOD,GPIO_Pin_10);\
+									GPIO_ResetBits(GPIOD,GPIO_Pin_12);GPIO_ResetBits(GPIOE,GPIO_Pin_11);
+
+#define sevenSegmentOneDisplayFour	GPIO_ResetBits(GPIOE,GPIO_Pin_13);GPIO_ResetBits(GPIOB,GPIO_Pin_11);GPIO_ResetBits(GPIOD,GPIO_Pin_10);\
+									GPIO_ResetBits(GPIOE,GPIO_Pin_11);
+
+#define sevenSegmentOneDisplayFive	GPIO_ResetBits(GPIOE,GPIO_Pin_13);GPIO_ResetBits(GPIOE,GPIO_Pin_11);GPIO_ResetBits(GPIOD,GPIO_Pin_10);\
+									GPIO_ResetBits(GPIOD,GPIO_Pin_12);GPIO_ResetBits(GPIOE,GPIO_Pin_15);\
+
+#define sevenSegmentOneDisplaySix	GPIO_ResetBits(GPIOE,GPIO_Pin_13);GPIO_ResetBits(GPIOE,GPIO_Pin_11);GPIO_ResetBits(GPIOD,GPIO_Pin_10);\
+									GPIO_ResetBits(GPIOD,GPIO_Pin_12);GPIO_ResetBits(GPIOD,GPIO_Pin_14);GPIO_ResetBits(GPIOE,GPIO_Pin_15);\
+
+#define sevenSegmentOneDisplaySeven	GPIO_ResetBits(GPIOB,GPIO_Pin_11);GPIO_ResetBits(GPIOD,GPIO_Pin_10);GPIO_ResetBits(GPIOE,GPIO_Pin_15);
+
+#define sevenSegmentOneDisplayEight	GPIO_ResetBits(GPIOE,GPIO_Pin_13);GPIO_ResetBits(GPIOE,GPIO_Pin_11);GPIO_ResetBits(GPIOD,GPIO_Pin_10);\
+									GPIO_ResetBits(GPIOD,GPIO_Pin_12);GPIO_ResetBits(GPIOD,GPIO_Pin_14);GPIO_ResetBits(GPIOE,GPIO_Pin_15);\
+									GPIO_ResetBits(GPIOB,GPIO_Pin_11);
+
+#define sevenSegmentOneDisplayNine	GPIO_ResetBits(GPIOE,GPIO_Pin_13);GPIO_ResetBits(GPIOE,GPIO_Pin_11);GPIO_ResetBits(GPIOD,GPIO_Pin_10);\
+									GPIO_ResetBits(GPIOD,GPIO_Pin_12);GPIO_ResetBits(GPIOE,GPIO_Pin_15);GPIO_ResetBits(GPIOB,GPIO_Pin_11);
+
+#define sevenSegmentReset			GPIO_SetBits(GPIOE,GPIO_Pin_11);GPIO_SetBits(GPIOE,GPIO_Pin_13);GPIO_SetBits(GPIOE,GPIO_Pin_15);\
+									GPIO_SetBits(GPIOB,GPIO_Pin_13);GPIO_SetBits(GPIOE,GPIO_Pin_14);GPIO_SetBits(GPIOB,GPIO_Pin_12);\
+									GPIO_SetBits(GPIOB,GPIO_Pin_14);GPIO_SetBits(GPIOD,GPIO_Pin_9);GPIO_SetBits(GPIOB,GPIO_Pin_11);\
+									GPIO_SetBits(GPIOD,GPIO_Pin_11);GPIO_SetBits(GPIOD,GPIO_Pin_10);GPIO_SetBits(GPIOD,GPIO_Pin_12);\
+									GPIO_SetBits(GPIOD,GPIO_Pin_14);GPIO_SetBits(GPIOE,GPIO_Pin_15);GPIO_SetBits(GPIOB,GPIO_Pin_15);\
+									GPIO_SetBits(GPIOD,GPIO_Pin_11);GPIO_SetBits(GPIOD,GPIO_Pin_8);GPIO_SetBits(GPIOE,GPIO_Pin_12);
 
 /*-----------------------------Exported functions-------------------------------*/
 void sevenSegmentInit(void);

@@ -42,17 +42,29 @@ int main(void) {
 	codec_DMA_Init(); // DMA Init for I2S Communication
 
 	debounceKeyInit();//Debounce routine Init
-	//sevenSegmentInit();
+	sevenSegmentInit();
 
 	const int32_t Fixed_Table_Size = INT_TO_FIXED(TABLE_SIZE);
 	VCO1.Phase_Difference = 0;
 	VCO2.Phase_Difference = 0;
+	int z;
+	int y;
+
 	while (1) {
 		LED_Button_Test();
 		Get_ADC_Values();
 		//Increment_Encoder_Test();
 		Get_Mean_Values();//Not working!! Too time intensive?!
-
+		y++;
+		if(y >= 10000){
+			z++;
+			y = 0;
+		}
+		if(z>= 100){
+			z = 0;
+		}
+		//sevenSegmentIntToDisplay(z);
+/*
 		if(INPUT_BUTTON_OUT1){
 			VCO1_Lock = Get_Lock_Values(VCO1_Lock);// Get Lock status of Pots
 			if((INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256))<0)INPUT_FREQUENCY_FINE_VALUE=2048;//limit lowest Frequency to avoid arbitrary behaviour
@@ -88,6 +100,42 @@ int main(void) {
 					VCO1.Phase_Accumulator-=DOUBLE_TO_FIXED(PHASE_MODULATION_DELAY);
 				}
 			}
+		}*/
+		if(INPUT_BUTTON_OUT1){
+			VCO1_Lock = Get_Lock_Values(VCO1_Lock);// Get Lock status of Pots
+			if((INPUT_FREQUENCY_COARSE_MEAN_VALUE+((INPUT_FREQUENCY_FINE_MEAN_VALUE>>3)-256))<0)INPUT_FREQUENCY_FINE_MEAN_VALUE=2048;//limit lowest Frequency to avoid arbitrary behaviour
+			if((INPUT_FREQUENCY_COARSE_MEAN_VALUE+((INPUT_FREQUENCY_FINE_MEAN_VALUE>>3)-256))>4095)INPUT_FREQUENCY_FINE_MEAN_VALUE=2048;//limit highest Frequency to avoid arbitrary behaviour
+			if(!VCO1_Lock.Freq_Lock & VCO1_Lock.Freq_Fine_Lock){
+				VCO1.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_MEAN_VALUE) * CV_FACTOR_2)*2); //Refresh Coarse Phase scaling for 1V/Octave CV
+				VCO1.Octave_Index = DOUBLE_TO_FIXED((INPUT_FREQUENCY_COARSE_MEAN_VALUE)/409.5);
+			}
+			//TODO: seperate Fine Freq Calculation from Coarse Calculation
+			if(!VCO1_Lock.Freq_Fine_Lock){
+				VCO1.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_MEAN_VALUE+((INPUT_FREQUENCY_FINE_MEAN_VALUE>>3)-256)) * CV_FACTOR_2)*2); //REfresh Coarse and fine Phase scaling for 1V/Octave CV
+				VCO1.Octave_Index = DOUBLE_TO_FIXED((INPUT_FREQUENCY_COARSE_MEAN_VALUE+((INPUT_FREQUENCY_FINE_MEAN_VALUE>>3)-256))/409.5);
+			}
+			if(FIXED_TO_DOUBLE(VCO1.Octave_Index)<0)VCO1.Octave_Index = 0;
+			if(!VCO1_Lock.Mix_Lock){//refresh mix value (0...1)
+				VCO1.Mix_Value = DOUBLE_TO_FIXED(INPUT_MIX_MEAN_VALUE/4095.0);
+			}
+			if(!VCO1_Lock.Shape_Lock){//Refresh shape Value(0...3)
+				VCO1.Shape_Value = DOUBLE_TO_FIXED(INPUT_WAVESHAPE_MEAN_VALUE/1365.0);
+			}
+			if(!VCO1_Lock.Phase_Lock){//refresh Phase Offset
+				int32_t Old_Phase_Value = VCO1.Phase_Mod_Value;
+				VCO1.Phase_Mod_Value = DOUBLE_TO_FIXED(INPUT_PHASE_MEAN_VALUE>>1);
+				if(Old_Phase_Value != VCO1.Phase_Mod_Value){
+					VCO1.Phase_Difference = VCO1.Phase_Difference + (VCO1.Phase_Mod_Value-Old_Phase_Value);
+				}
+				if(FIXED_TO_INT(VCO1.Phase_Difference)>0){
+					VCO1.Phase_Difference -=DOUBLE_TO_FIXED(PHASE_MODULATION_DELAY);
+					VCO1.Phase_Accumulator+=DOUBLE_TO_FIXED(PHASE_MODULATION_DELAY);
+				}
+				if(FIXED_TO_INT(VCO1.Phase_Difference)<0){
+					VCO1.Phase_Difference+=DOUBLE_TO_FIXED(PHASE_MODULATION_DELAY);
+					VCO1.Phase_Accumulator-=DOUBLE_TO_FIXED(PHASE_MODULATION_DELAY);
+				}
+			}
 		}
 		else{ //Lock all Pot Values when Select-Button is off
 			VCO1_Lock.Audio_Lock = true;
@@ -100,26 +148,26 @@ int main(void) {
 		}
 		if(INPUT_BUTTON_OUT2){
 			VCO2_Lock = Get_Lock_Values(VCO2_Lock);// Get Lock status of Pots
-			if((INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256))<0)INPUT_FREQUENCY_FINE_VALUE=2048;//limit lowest Frequency to avoid arbitrary behaviour
-			if((INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256))>4095)INPUT_FREQUENCY_FINE_VALUE=2048;//limit highest Frequency to avoid arbitrary behaviour
+			if((INPUT_FREQUENCY_COARSE_MEAN_VALUE+((INPUT_FREQUENCY_FINE_MEAN_VALUE>>3)-256))<0)INPUT_FREQUENCY_FINE_MEAN_VALUE=2048;//limit lowest Frequency to avoid arbitrary behaviour
+			if((INPUT_FREQUENCY_COARSE_MEAN_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256))>4095)INPUT_FREQUENCY_FINE_MEAN_VALUE=2048;//limit highest Frequency to avoid arbitrary behaviour
 			if(!VCO2_Lock.Freq_Lock & VCO2_Lock.Freq_Fine_Lock){
-				VCO2.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_VALUE) * CV_FACTOR_2)*2); //Phase scaling for 1V/Octave CV
-				VCO2.Octave_Index = DOUBLE_TO_FIXED((INPUT_FREQUENCY_COARSE_VALUE)/409.5);
+				VCO2.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_MEAN_VALUE) * CV_FACTOR_2)*2); //Phase scaling for 1V/Octave CV
+				VCO2.Octave_Index = DOUBLE_TO_FIXED((INPUT_FREQUENCY_COARSE_MEAN_VALUE)/409.5);
 			}
 			if(!VCO2_Lock.Freq_Fine_Lock){
-				VCO2.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256)) * CV_FACTOR_2)*2); //Refresh Coarse Phase scaling for 1V/Octave CV
-				VCO2.Octave_Index = DOUBLE_TO_FIXED((INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256))/409.5);
+				VCO2.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_MEAN_VALUE+((INPUT_FREQUENCY_FINE_MEAN_VALUE>>3)-256)) * CV_FACTOR_2)*2); //Refresh Coarse Phase scaling for 1V/Octave CV
+				VCO2.Octave_Index = DOUBLE_TO_FIXED((INPUT_FREQUENCY_COARSE_MEAN_VALUE+((INPUT_FREQUENCY_FINE_MEAN_VALUE>>3)-256))/409.5);
 			}
 			if(!VCO2_Lock.Mix_Lock){//refresh mix value (0...1)
-				VCO2.Mix_Value = DOUBLE_TO_FIXED(INPUT_MIX_VALUE/4095.0);
+				VCO2.Mix_Value = DOUBLE_TO_FIXED(INPUT_MIX_MEAN_VALUE/4095.0);
 			}
 			if(!VCO2_Lock.Shape_Lock){//Refresh shape Value(0...3)
-				VCO2.Shape_Value = DOUBLE_TO_FIXED(INPUT_WAVESHAPE_VALUE/1365.0);
+				VCO2.Shape_Value = DOUBLE_TO_FIXED(INPUT_WAVESHAPE_MEAN_VALUE/1365.0);
 			}
 			//TODO: Frequency dependent Phase_Offset Calculation
 			if(!VCO2_Lock.Phase_Lock){//refresh Phase Offset
 				int32_t Old_Phase_Value = VCO2.Phase_Mod_Value;
-					VCO2.Phase_Mod_Value = DOUBLE_TO_FIXED(INPUT_PHASE_VALUE>>1);
+					VCO2.Phase_Mod_Value = DOUBLE_TO_FIXED(INPUT_PHASE_MEAN_VALUE>>1);
 					if(Old_Phase_Value != VCO1.Phase_Mod_Value){
 						VCO2.Phase_Difference = VCO2.Phase_Difference + (VCO2.Phase_Mod_Value-Old_Phase_Value);
 					}
