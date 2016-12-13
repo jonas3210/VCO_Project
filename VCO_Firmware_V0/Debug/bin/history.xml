@@ -1,30 +1,29 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
-   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=VCO_Firmware_V0.map -O0 --gc-sections -lm -LC:\CooCox\CoIDE\configuration\ProgramData\VCO_Firmware_V0 -TC:\CooCox\CoIDE\configuration\ProgramData\VCO_Firmware_V0/arm-gcc-link.ld -g">
-      <target file="VCO_Firmware_V0.elf" lastModified="15882c8aa5f">
-         <source file="..\obj\semihosting.o" lastModified="1587e82bdf2"/>
-         <source file="..\obj\codec_configuration.o" lastModified="15882c108fe"/>
-         <source file="..\obj\stm32f4xx_pwr.o" lastModified="1587e82c06f"/>
-         <source file="..\obj\stm32f4xx_dac.o" lastModified="1587e82c164"/>
-         <source file="..\obj\startup_stm32f4xx.o" lastModified="1587e82c20a"/>
-         <source file="..\obj\main.o" lastModified="15882c8a806"/>
-         <source file="..\obj\stm32f4xx_rcc.o" lastModified="1587e82c89e"/>
-         <source file="..\obj\inputProcessing.o" lastModified="15882c10e5b"/>
-         <source file="..\obj\stm32f4xx_adc.o" lastModified="1587e82cabf"/>
-         <source file="..\obj\printf.o" lastModified="1587e82cbbb"/>
-         <source file="..\obj\sevenSegment.o" lastModified="1587e82cc9d"/>
-         <source file="..\obj\stm32f4xx_gpio.o" lastModified="1587e82cd89"/>
-         <source file="..\obj\sh_cmd.o" lastModified="1587e82cdb9"/>
-         <source file="..\obj\system_stm32f4xx.o" lastModified="1587e82ce88"/>
-         <source file="..\obj\syscalls.o" lastModified="1587e82cf5c"/>
-         <source file="..\obj\stm32f4xx_dma.o" lastModified="1587e82d05c"/>
-         <source file="..\obj\debounceKey.o" lastModified="1587e82d13a"/>
-         <source file="..\obj\stm32f4xx_spi.o" lastModified="1587e82d24c"/>
-         <source file="..\obj\stm32f4xx_i2c.o" lastModified="1587e82d36e"/>
-         <source file="..\obj\stm32f4xx_exti.o" lastModified="1587e82d44e"/>
-         <source file="..\obj\misc.o" lastModified="1587e82d51d"/>
-         <source file="..\obj\adc_multichannel_init.o" lastModified="15882c10f14"/>
-         <source file="..\obj\stm32f4xx_tim.o" lastModified="1587e82d7de"/>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=VCO_Firmware_V0.map -O0 --gc-sections -lm -LC:\Program Files\CoIDE\configuration\ProgramData\VCO_Firmware_V0 -TC:\Program Files\CoIDE\configuration\ProgramData\VCO_Firmware_V0/arm-gcc-link.ld -g">
+      <target file="VCO_Firmware_V0.elf" lastModified="158f9a83ac8">
+         <source file="..\obj\semihosting.o" lastModified="158f9a6fd52"/>
+         <source file="..\obj\codec_configuration.o" lastModified="158f9a6fe60"/>
+         <source file="..\obj\stm32f4xx_pwr.o" lastModified="158f9a6ff00"/>
+         <source file="..\obj\stm32f4xx_dac.o" lastModified="158f9a6ffaa"/>
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="158f9a70022"/>
+         <source file="..\obj\main.o" lastModified="158f9a706f8"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="158f9a707e8"/>
+         <source file="..\obj\inputProcessing.o" lastModified="158f9a708c4"/>
+         <source file="..\obj\stm32f4xx_adc.o" lastModified="158f9a709aa"/>
+         <source file="..\obj\printf.o" lastModified="158f9a70a4a"/>
+         <source file="..\obj\sevenSegment.o" lastModified="158f9a70ad6"/>
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="158f9a70b94"/>
+         <source file="..\obj\sh_cmd.o" lastModified="158f9a70bc6"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="158f9a70c52"/>
+         <source file="..\obj\syscalls.o" lastModified="158f9a70cd4"/>
+         <source file="..\obj\stm32f4xx_dma.o" lastModified="158f9a70d7e"/>
+         <source file="..\obj\stm32f4xx_spi.o" lastModified="158f9a70ebe"/>
+         <source file="..\obj\stm32f4xx_i2c.o" lastModified="158f9a70f72"/>
+         <source file="..\obj\stm32f4xx_exti.o" lastModified="158f9a71008"/>
+         <source file="..\obj\misc.o" lastModified="158f9a71094"/>
+         <source file="..\obj\adc_multichannel_init.o" lastModified="158f9a71148"/>
+         <source file="..\obj\stm32f4xx_tim.o" lastModified="158f9a7124c"/>
       </target>
    </processor>
 </history>
