@@ -146,37 +146,13 @@ void TIM7_IRQHandler(void)
 				}
 				sevenSegmentIntToDisplay(Bank_Value);															//Changed Bankvalue gets displayed on seven segment display
 			}
-			else
-			{
-				if(Bank_Value < 99)
-				{
-					Bank_Value++;
-					GPIO_ToggleBits(GPIOE,GPIO_Pin_4);
-				}
-				else
-				{
-					Bank_Value = 0;
-				}
-				sevenSegmentIntToDisplay(Bank_Value);
-			}
 		}
 		if(((incrementGiver.lastStateC8 == 1) && (incrementGiver.actualStateC8 == 0)))
 		{																										//a lower bank is displayed/choosed
 			incrementGiver.timeCount = 10;																		//if it is turned right a higher bank is choosed
 			if(incrementGiver.actualStateA8 == 1)
 			{
-				if(Bank_Value > 0)																				//Possible bank values 0-99
-				{
-					Bank_Value--;
-				}
-				else
-				{
-					Bank_Value = 99;
-				}
-				sevenSegmentIntToDisplay(Bank_Value);															//Changed Bankvalue gets displayed on seven segment display
-			}
-			else
-			{
+
 				if(Bank_Value < 99)
 				{
 					Bank_Value++;

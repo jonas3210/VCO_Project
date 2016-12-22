@@ -16,6 +16,7 @@ uint16_t Linear_Interpolation(int32_t Accumulator, int16_t Table[],uint16_t Tabl
 int32_t Subtable_Interpolation(int32_t Accumulator,int32_t Ocatve_Index, int16_t Tables[][2048], uint16_t Table_Size);
 int32_t Waveshape_Modulation(VCO VCO);
 int16_t Mix_Modulation(int32_t Sample1, int32_t Sample2, int32_t Mix_Value);
+void get_FM_Values();
 void LED_Init(void);
 void LED_Button_Test(void);
 void VCO_Lock_Init(void);
@@ -45,22 +46,26 @@ int main(void) {
 
 	const int32_t Fixed_Table_Size = INT_TO_FIXED(TABLE_SIZE);
 
-	while (1) {
-		LED_Button_Test();
+	saveBanksInit();
+	while(1){LED_Button_Test();}
+
+	while (0) {
+		//LED_Button_Test();
 		Get_ADC_Values();
+		get_FM_Values();
 		//Get_Mean_Values();//Not working!! Too time intensive?!
 		if(INPUT_BUTTON_OUT1){
 			VCO1_Lock = Get_Lock_Values(VCO1_Lock);// Get Lock status of Pots
-			if((INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256))<0)INPUT_FREQUENCY_FINE_VALUE=2048;//limit lowest Frequency to avoid arbitrary behaviour
-			if((INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256))>4095)INPUT_FREQUENCY_FINE_VALUE=2048;//limit highest Frequency to avoid arbitrary behaviour
+			if((INPUT_FREQUENCY_COARSE_VALUE_FM_MODULATED+((INPUT_FREQUENCY_FINE_VALUE_FM_MODULATED>>3)-256))<0)INPUT_FREQUENCY_FINE_VALUE_FM_MODULATED=2048;//limit lowest Frequency to avoid arbitrary behaviour
+			if((INPUT_FREQUENCY_COARSE_VALUE_FM_MODULATED+((INPUT_FREQUENCY_FINE_VALUE_FM_MODULATED>>3)-256))>4095)INPUT_FREQUENCY_FINE_VALUE_FM_MODULATED=2048;//limit highest Frequency to avoid arbitrary behaviour
 			if(!VCO1_Lock.Freq_Lock & VCO1_Lock.Freq_Fine_Lock){
-				VCO1.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_VALUE) * CV_FACTOR_2)*4); //Refresh Coarse Phase scaling for 1V/Octave CV
-				VCO1.Octave_Index = DOUBLE_TO_FIXED((INPUT_FREQUENCY_COARSE_VALUE)/409.5);
+				VCO1.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_VALUE_FM_MODULATED) * CV_FACTOR_2)*4); //Refresh Coarse Phase scaling for 1V/Octave CV
+				VCO1.Octave_Index = DOUBLE_TO_FIXED((INPUT_FREQUENCY_COARSE_VALUE_FM_MODULATED)/409.5);
 			}
 			//TODO: seperate Fine Freq Calculation from Coarse Calculation
 			if(!VCO1_Lock.Freq_Fine_Lock){
-				VCO1.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256)) * CV_FACTOR_2)*4); //REfresh Coarse and fine Phase scaling for 1V/Octave CV
-				VCO1.Octave_Index = DOUBLE_TO_FIXED((INPUT_FREQUENCY_COARSE_VALUE+((INPUT_FREQUENCY_FINE_VALUE>>3)-256))/409.5);
+				VCO1.Phase_Shift = DOUBLE_TO_FIXED(CV_FACTOR_1 * pow(2,(INPUT_FREQUENCY_COARSE_VALUE_FM_MODULATED+((INPUT_FREQUENCY_FINE_VALUE_FM_MODULATED>>3)-256)) * CV_FACTOR_2)*4); //REfresh Coarse and fine Phase scaling for 1V/Octave CV
+				VCO1.Octave_Index = DOUBLE_TO_FIXED((INPUT_FREQUENCY_COARSE_VALUE_FM_MODULATED+((INPUT_FREQUENCY_FINE_VALUE_FM_MODULATED>>3)-256))/409.5);
 			}
 
 			if(!VCO1_Lock.Mix_Lock){//refresh mix value (0...1)
@@ -283,7 +288,7 @@ void LED_Init(void) {
  * @brief  Test function for Push Buttons and LEDs
  */
 void LED_Button_Test(void) {
-	if (INPUT_BUTTON_HOLD) {
+	/*if (INPUT_BUTTON_HOLD) {
 		LED_HOLD_ON;
 	} else {
 		LED_HOLD_OFF;
@@ -307,6 +312,121 @@ void LED_Button_Test(void) {
 		LED_REC_ON;
 	} else {
 		LED_REC_OFF;
+	}*/
+	Bank_Value = 99;
+	if(!VCO1_Lock.FM_Lock)
+	{
+		VCO1.Phase_Shift		= 1;
+		VCO1.Octave_Index 		= 1;
+		VCO1.Phase_Mod_Value	= 595;
+		VCO1.Shape_Value 		= 3667;
+		VCO1.FM_Value 			= 4057;
+		VCO1.Mix_Value 			= 3649;
 	}
+
+	if(INPUT_BUTTON_LINLOG)
+	{
+		VCO1_Lock.FM_Lock = 0;
+		INPUT_BUTTON_LINLOG = 0;
+	}
+
+	if(INPUT_BUTTON_REC) //Save
+	{
+		VCO1.Phase_Shift		= 10;
+		VCO1.Octave_Index 		= 5;
+		VCO1.Phase_Mod_Value	= 4095;
+		VCO1.Shape_Value 		= 3067;
+		VCO1.FM_Value 			= 2657;
+		VCO1.Mix_Value 			= 1349;
+		INPUT_BUTTON_REC = 0;
+		saveBank();
+	}
+	if(INPUT_BUTTON_HOLD)
+	{
+		loadBank();
+		INPUT_BUTTON_HOLD = 0;
+	}
+
+	if(VCO1.Phase_Shift == 10)
+	{
+		LED_LINLOG_ON;
+	}
+	else
+	{
+		LED_LINLOG_OFF;
+	}
+	if(VCO1.Octave_Index== 5)
+	{
+		LED_HOLD_ON;
+	}
+	else
+	{
+		LED_HOLD_OFF;
+	}
+	if(VCO1.Phase_Mod_Value == 4095)
+	{
+		LED_REC_ON;
+	}
+	else
+	{
+		LED_REC_OFF;
+	}
+	if(VCO1.Shape_Value == 3067)
+	{
+		LED_OUT1_ON;
+	}
+	else
+	{
+		LED_OUT1_OFF;
+	}
+	if(VCO1.FM_Value == 2657)
+	{
+		LED_OUT2_ON;
+	}
+	else
+	{
+		LED_OUT2_OFF;
+	}
+	if(VCO1.Mix_Value == 1349)
+	{
+		LED_ORIGIN_ON;
+	}
+	else
+	{
+		LED_ORIGIN_OFF;
+	}
+
 }
 
+//*******************************************************************
+/**
+ * @brief  Function Calculates the FM-modified frequency Values
+ */
+get_FM_Values()
+{
+ 	//Coarse Value
+	INPUT_FREQUENCY_COARSE_VALUE_FM_MODULATED 	= /*INPUT_FREQUENCY_COARSE_VALUE*/(int) (INPUT_FREQUENCY_COARSE_VALUE*(0.5+((double) (INPUT_FM_VALUE/2730.0))));
+	//Fine Value
+	INPUT_FREQUENCY_FINE_VALUE_FM_MODULATED		= INPUT_FREQUENCY_FINE_VALUE;
+	/*if(INPUT_FREQUENCY_COARSE_VALUE_FM_MODULATED > 4095)
+	{
+		INPUT_FREQUENCY_COARSE_VALUE_FM_MODULATED = 4095;
+		LED_REC_OFF;
+	}
+	else
+	{
+		LED_REC_ON;
+	}
+
+	if((int) (INPUT_FREQUENCY_COARSE_VALUE*(0.25+((double) (INPUT_FM_VALUE/1092.0)))) > 2048)
+	{
+
+		LED_LINLOG_ON;
+	}
+	else
+	{
+		LED_LINLOG_OFF;
+	}*/
+
+	printf("%d",INPUT_FREQUENCY_COARSE_VALUE_FM_MODULATED);
+}

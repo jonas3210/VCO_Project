@@ -33,7 +33,9 @@
 #define CV_FACTOR_1 0.1744170667//(I2S_BUFFERSIZE*TONE_FREQUENCY_C0/(2*SAMPLE_FREQUENCY))
 #define CV_FACTOR_2 0.0024420024//0.0097751712//10/(ADC_RESOLUTION-1)
 #define PI 3.14159265359
-
+//Frequency-Modulation
+#define INPUT_FREQUENCY_COARSE_VALUE_FM_MODULATED coarse_fm_frequency_value
+#define INPUT_FREQUENCY_FINE_VALUE_FM_MODULATED fine_fm_frequency_value
 /* Exported types ------------------------------------------------------------*/
 typedef struct{
 	//int16_t Output_Buffer[I2S_BUFFERSIZE/2];//Output Buffer Channel1
@@ -76,4 +78,8 @@ volatile int16_t i2s_Out[I2S_BUFFERSIZE];//I2S Output Buffer
 volatile uint8_t Transfer_Complete_Flag;//Flag for I2S Transmission finished -> Start point of wave calculation
 
 volatile uint8_t Bank_Value;//Actual Bank Value
+
+volatile uint16_t coarse_fm_frequency_value;
+volatile uint16_t fine_fm_frequency_value;
+
 #endif /* __GLOBAL_VARIABLES_H */

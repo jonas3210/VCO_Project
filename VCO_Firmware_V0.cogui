@@ -11,29 +11,48 @@
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+</presentation>
 </folder>
 </info>
 </editorArea>
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/Users/Harold/Documents/VCO/VCO_Project/main.c" title="main.c" tooltip="C:/Users/Harold/Documents/VCO/VCO_Project/main.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/VCO_Firmware_V0/main.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="15048" selectionTopPixel="4691"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="inputProcessing.c" partName="inputProcessing.c" path="C:/Users/Harold/Documents/VCO/VCO_Project/VCO_lib/source/inputProcessing.c" title="inputProcessing.c" tooltip="C:/Users/Harold/Documents/VCO/VCO_Project/VCO_lib/source/inputProcessing.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/VCO_Firmware_V0/VCO_lib/source/inputProcessing.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="30" selectionOffset="4669" selectionTopPixel="2118"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="saveBanks.c" partName="saveBanks.c" path="C:/Users/Harold/Documents/VCO/VCO_Project/VCO_lib/source/saveBanks.c" title="saveBanks.c" tooltip="C:/Users/Harold/Documents/VCO/VCO_Project/VCO_lib/source/saveBanks.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/VCO_Firmware_V0/VCO_lib/source/saveBanks.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2844" selectionTopPixel="352"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="Global_Variables.h" partName="Global_Variables.h" path="C:/Users/Harold/Documents/VCO/VCO_Project/VCO_lib/include/Global_Variables.h" title="Global_Variables.h" tooltip="C:/Users/Harold/Documents/VCO/VCO_Project/VCO_lib/include/Global_Variables.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/VCO_Firmware_V0/VCO_lib/include/Global_Variables.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="131" selectionOffset="1582" selectionTopPixel="863"/>
+</editor>
 </editors>
 <views>
 <view id="org.coocox.builder.ui.views.ProjectView" partName="Project">
-<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="0">
+<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="1">
 <expanded>
 <element path="/VCO_Firmware_V0"/>
 <element path="/VCO_Firmware_V0/VCO_lib"/>
 <element path="/VCO_Firmware_V0/VCO_lib/include"/>
 <element path="/VCO_Firmware_V0/VCO_lib/source"/>
 </expanded>
+<selection>
+<element path="/VCO_Firmware_V0/VCO_lib/include/Global_Variables.h"/>
+</selection>
 </viewState>
 </view>
 <view id="org.eclipse.debug.ui.RegisterView" partName="Registers">
 <viewState/>
-</view>
-<view id="org.coocox.builder.ui.exampleView" partName="Retarget printf Examples">
-<viewState>
-<Examples ComponentId="31" Title="Retarget printf"/>
-</viewState>
 </view>
 <view id="org.eclipse.search.ui.views.SearchView" partName="Search">
 <viewState isPinned="false">
@@ -48,7 +67,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.coocox.builder.ui.views.ProjectView" activePerspective="org.coocox.builder.perspective.CoBuilder">
+<perspectives activePart="org.eclipse.cdt.ui.editor.CEditor" activePerspective="org.coocox.builder.perspective.CoBuilder">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.coocox.builder.ui.PerspectiveCoBuilder" id="org.coocox.builder.perspective.CoBuilder" label="CooCox CoBuilder"/>
 <alwaysOnActionSet id="org.coocox.component.ui.actionSet"/>
@@ -81,7 +100,6 @@
 <view id="org.coocox.builder.ui.views.ProjectView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="org.eclipse.search.ui.views.SearchView"/>
-<view id="org.coocox.builder.ui.exampleView"/>
 <fastViewBars/>
 <layout>
 <mainWindow>
@@ -105,7 +123,7 @@
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1089f1e" ratio="0.90271133" ratioLeft="566" ratioRight="61" relationship="4" relative="org.eclipse.ui.internal.ViewStack@ffaa35">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1089f1e" ratio="0.75438595" ratioLeft="473" ratioRight="154" relationship="4" relative="org.eclipse.ui.internal.ViewStack@ffaa35">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
@@ -116,11 +134,9 @@
 </folder>
 </info>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@f34302" ratio="0.10331384" ratioLeft="106" ratioRight="920" relationship="2" relative="org.eclipse.ui.internal.ViewStack@ffaa35">
-<folder activePageID="org.coocox.builder.ui.exampleView" appearance="2" expanded="2">
-<page content="org.coocox.builder.ui.exampleView" label="Retarget printf Examples"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
+<folder appearance="2" expanded="2">
+<page content="org.coocox.builder.ui.exampleView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@c325b" ratio="0.7198113" ratioLeft="763" ratioRight="297" relationship="2" relative="org.eclipse.ui.internal.ViewStack@f34302">
@@ -205,7 +221,7 @@
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@e81e6c" ratio="0.69952303" ratioLeft="440" ratioRight="189" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1763030">&#x0A;<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@e81e6c" ratio="0.69952303" ratioLeft="440" ratioRight="189" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1763030">&#x0A;<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
@@ -235,24 +251,206 @@
 </perspective>
 </perspectives>
 <workingSets/>
-<navigationHistory/>
+<navigationHistory>
+<editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/VCO_Firmware_V0/main.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/VCO_Firmware_V0/VCO_lib/include/fixed_point.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/VCO_Firmware_V0/VCO_lib/source/inputProcessing.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/VCO_Firmware_V0/VCO_lib/source/saveBanks.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/VCO_Firmware_V0/VCO_lib/include/Global_Variables.h"/>
+</editors>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="1645" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="1699" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="1770" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="1844" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="1865" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="1885" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="1963" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15306" y="0"/>
+</item>
+<item historyLabel="fixed_point.h" index="1">
+<position info="not_deleted" x="1780" y="15"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15306" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="1877" y="0"/>
+</item>
+<item historyLabel="inputProcessing.c" index="2">
+<position info="not_deleted" x="4669" y="30"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15330" y="0"/>
+</item>
+<item historyLabel="saveBanks.c" index="3">
+<position info="not_deleted" x="2844" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15330" y="0"/>
+</item>
+<item historyLabel="Global_Variables.h" index="4">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15330" y="0"/>
+</item>
+<item historyLabel="saveBanks.c" index="3">
+<position info="not_deleted" x="2844" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15274" y="0"/>
+</item>
+<item historyLabel="Global_Variables.h" index="4">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="inputProcessing.c" index="2">
+<position info="not_deleted" x="4669" y="30"/>
+</item>
+<item historyLabel="saveBanks.c" index="3">
+<position info="not_deleted" x="2844" y="0"/>
+</item>
+<item historyLabel="inputProcessing.c" index="2">
+<position info="not_deleted" x="4669" y="30"/>
+</item>
+<item historyLabel="Global_Variables.h" index="4">
+<position info="not_deleted" x="1582" y="131"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15072" y="0"/>
+</item>
+<item historyLabel="saveBanks.c" index="3">
+<position info="not_deleted" x="2844" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15072" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15072" y="0"/>
+</item>
+<item historyLabel="Global_Variables.h" index="4">
+<position info="not_deleted" x="1582" y="131"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15072" y="0"/>
+</item>
+<item historyLabel="Global_Variables.h" index="4">
+<position info="not_deleted" x="1582" y="131"/>
+</item>
+<item historyLabel="saveBanks.c" index="3">
+<position info="not_deleted" x="2844" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15072" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="16115" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="16084" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="16077" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15077" y="25"/>
+</item>
+<item historyLabel="Global_Variables.h" index="4">
+<position info="not_deleted" x="1582" y="131"/>
+</item>
+<item historyLabel="saveBanks.c" index="3">
+<position info="not_deleted" x="2844" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15077" y="25"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15509" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15842" y="0"/>
+</item>
+<item historyLabel="inputProcessing.c" index="2">
+<position info="not_deleted" x="4669" y="30"/>
+</item>
+<item historyLabel="saveBanks.c" index="3">
+<position info="not_deleted" x="2844" y="0"/>
+</item>
+<item historyLabel="Global_Variables.h" index="4">
+<position info="not_deleted" x="1582" y="131"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="15842" y="0"/>
+</item>
+<item historyLabel="Global_Variables.h" index="4">
+<position info="not_deleted" x="1582" y="131"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="16055" y="0"/>
+</item>
+<item historyLabel="inputProcessing.c" index="2">
+<position info="not_deleted" x="4669" y="30"/>
+</item>
+<item active="true" historyLabel="main.c" index="0">
+<position info="not_deleted" x="16055" y="0"/>
+</item>
+</navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Global_Variables.h" tooltip="VCO_Firmware_V0/VCO_lib/include/Global_Variables.h">
+<persistable path="/VCO_Firmware_V0/VCO_lib/include/Global_Variables.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="saveBanks.c" tooltip="VCO_Firmware_V0/VCO_lib/source/saveBanks.c">
+<persistable path="/VCO_Firmware_V0/VCO_lib/source/saveBanks.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="inputProcessing.c" tooltip="VCO_Firmware_V0/VCO_lib/source/inputProcessing.c">
+<persistable path="/VCO_Firmware_V0/VCO_lib/source/inputProcessing.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" tooltip="VCO_Firmware_V0/cmsis_boot/startup/startup_stm32f4xx.c">
+<persistable path="/VCO_Firmware_V0/cmsis_boot/startup/startup_stm32f4xx.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="fixed_point.h" tooltip="VCO_Firmware_V0/VCO_lib/include/fixed_point.h">
+<persistable path="/VCO_Firmware_V0/VCO_lib/include/fixed_point.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="VCO_Firmware_V0/main.c">
+<persistable path="/VCO_Firmware_V0/main.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="eeprom.c" tooltip="VCO_Firmware_V0/VCO_lib/source/eeprom.c">
+<persistable path="/VCO_Firmware_V0/VCO_lib/source/eeprom.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="saveBanks.h" tooltip="VCO_Firmware_V0/VCO_lib/include/saveBanks.h">
+<persistable path="/VCO_Firmware_V0/VCO_lib/include/saveBanks.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="adc_multichannel_init.h" tooltip="VCO_Firmware_V0/VCO_lib/include/adc_multichannel_init.h">
+<persistable path="/VCO_Firmware_V0/VCO_lib/include/adc_multichannel_init.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="adc_multichannel_init.c" tooltip="VCO_Firmware_V0/VCO_lib/source/adc_multichannel_init.c">
+<persistable path="/VCO_Firmware_V0/VCO_lib/source/adc_multichannel_init.c"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="debounceKey.c" tooltip="VCO_Firmware_V0/VCO_lib/source/debounceKey.c">
 <persistable path="/VCO_Firmware_V0/VCO_lib/source/debounceKey.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="sevenSegment.c" tooltip="VCO_Firmware_V0/VCO_lib/source/sevenSegment.c">
 <persistable path="/VCO_Firmware_V0/VCO_lib/source/sevenSegment.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="VCO_Firmware_V0/main.c">
-<persistable path="/VCO_Firmware_V0/main.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="inputProcessing.c" tooltip="VCO_Firmware_V0/VCO_lib/source/inputProcessing.c">
-<persistable path="/VCO_Firmware_V0/VCO_lib/source/inputProcessing.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="inputProcessing.h" tooltip="VCO_Firmware_V0/VCO_lib/include/inputProcessing.h">
 <persistable path="/VCO_Firmware_V0/VCO_lib/include/inputProcessing.h"/>
@@ -260,29 +458,8 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.h" tooltip="VCO_Firmware_V0/main.h">
 <persistable path="/VCO_Firmware_V0/main.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="debounceKey.h" tooltip="VCO_Firmware_V0/VCO_lib/include/debounceKey.h">
-<persistable path="/VCO_Firmware_V0/VCO_lib/include/debounceKey.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Global_Variables.h" tooltip="VCO_Firmware_V0/VCO_lib/include/Global_Variables.h">
-<persistable path="/VCO_Firmware_V0/VCO_lib/include/Global_Variables.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="sevenSegment.h" tooltip="VCO_Firmware_V0/VCO_lib/include/sevenSegment.h">
-<persistable path="/VCO_Firmware_V0/VCO_lib/include/sevenSegment.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="saveBanks.h" tooltip="VCO_Firmware_V0/VCO_lib/include/saveBanks.h">
-<persistable path="/VCO_Firmware_V0/VCO_lib/include/saveBanks.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="saveBanks.c" tooltip="VCO_Firmware_V0/VCO_lib/source/saveBanks.c">
-<persistable path="/VCO_Firmware_V0/VCO_lib/source/saveBanks.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="incrementGiver.c" tooltip="GettingStarted/incrementGiver.c">
-<persistable path="/GettingStarted/incrementGiver.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="incrementGiver.h" tooltip="GettingStarted/incrementGiver.h">
-<persistable path="/GettingStarted/incrementGiver.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="saveBanks.h" tooltip="GettingStarted/saveBanks.h">
-<persistable path="/GettingStarted/saveBanks.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.h" tooltip="VCO_Firmware_V0/main.h">
+<persistable path="/VCO_Firmware_V0/main.h"/>
 </file>
 </mruList>
 </workbench>
