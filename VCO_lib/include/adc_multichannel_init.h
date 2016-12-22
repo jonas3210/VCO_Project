@@ -41,8 +41,9 @@
 #define INPUT_FREQUENCY_COARSE_MEAN_VALUE ADC_Mean_Values[6]
 #define INPUT_WAVESHAPE_MEAN_VALUE ADC_Mean_Values[2]
 
-#define ADC_VALUE_CHANGE_THRESHOLD 25 //Defines noise Level of Inputs for stable ADC Values
-#define LOCK_THRESHOLD 30//Defines necessary value change for unlock parameter
+#define ADC_VALUE_CHANGE_THRESHOLD 2 //Defines noise Level of Inputs for stable ADC Values
+#define ADC_MEAN_VALUE_CHANGE_THRESHOLD 10 //Defines noise Level of Inputs for stable ADC Values
+#define LOCK_THRESHOLD 10//Defines necessary value change for unlock parameter
 //Amount of ADC-Channels
 #define CHANNEL_AMOUNT 7
 
@@ -58,6 +59,7 @@ volatile uint16_t ADC_Mean_Values[CHANNEL_AMOUNT];
 volatile uint16_t ADC_Buffer[CHANNEL_AMOUNT];//ADC Buffer with control input values
 volatile uint16_t ADC_Values[CHANNEL_AMOUNT];//ADC Values after Stabilization
 volatile uint16_t ADC_Differences[CHANNEL_AMOUNT];// ADC Value differences to last Value
+volatile uint16_t ADC_Mean_Differences[CHANNEL_AMOUNT];// ADC Value differences to last Value
 
 /* Exported functions ------------------------------------------------------- */
 

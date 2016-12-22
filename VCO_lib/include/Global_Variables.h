@@ -27,7 +27,7 @@
 #define TABLE_SIZE 2048
 #define SUBTABLE_SIZE 11
 
-#define PHASE_MODULATION_DELAY 1
+#define PHASE_MODULATION_DELAY 0.5
 
 #define ADC_RESOLUTION 4096
 
@@ -78,6 +78,8 @@ volatile int16_t VCO2_Output_Buffer [I2S_BUFFERSIZE/2];//Output Buffer Channel2
 volatile int16_t i2s_Out[I2S_BUFFERSIZE];//I2S Output Buffer
 
 volatile uint8_t Transfer_Complete_Flag;//Flag for I2S Transmission finished -> Start point of wave calculation
-
+volatile bool Save_Flag;
+volatile bool Menu_Flag;
+volatile bool Load_Save_Flag;
 volatile uint8_t Bank_Value;//Actual Bank Value
 #endif /* __GLOBAL_VARIABLES_H */

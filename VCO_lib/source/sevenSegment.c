@@ -45,7 +45,6 @@ void sevenSegmentInit(void)
 	  GPIO_Init(GPIOD, &GPIO_InitStructure);
 
 		sevenSegmentReset;
-		sevenSegmentTwoDisplayTwo;
 }
 
 /**

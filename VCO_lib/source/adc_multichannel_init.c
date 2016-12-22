@@ -119,11 +119,11 @@ void ADC1_Poti_Init(void){
 
 	ADC_SoftwareStartConv(ADC1);
 
-	for(int i = 0; i<CHANNEL_AMOUNT; i++){
+	/*for(int i = 0; i<CHANNEL_AMOUNT; i++){
 		for(int j = 0; j<MEAN_SIZE; j++){
 			Input_Mean_Buffer[i][j]=0;
 		}
-	}
+	}*/
 }
 
 //*******************************************************************
@@ -149,7 +149,7 @@ void Get_ADC_Values(void){
  */
 Parameter_Lock Get_Lock_Values(Parameter_Lock VCO_Temp_Lock){
 	for(int i=0; i<CHANNEL_AMOUNT;i++){
-		if(ADC_Differences[i]>LOCK_THRESHOLD){
+		if(ADC_Mean_Differences[i]>LOCK_THRESHOLD){
 			switch(i){
 			case 0: VCO_Temp_Lock.Phase_Lock = false;
 					break;
@@ -190,7 +190,10 @@ void Get_Mean_Values(void){
 		Temp_ADC_Buffer = ADC_Values[j];
 		Input_Mean_Buffer[j][0] = Temp_ADC_Buffer;
 		Temp_Mean_Value += Temp_ADC_Buffer;
-		ADC_Mean_Values[j] = (int16_t)(Temp_Mean_Value>>7);
+		ADC_Mean_Differences[j]= fabs((int16_t)(Temp_Mean_Value>>7)-ADC_Mean_Values[j]);
+		if(ADC_Mean_Differences[j]>ADC_MEAN_VALUE_CHANGE_THRESHOLD){
+			ADC_Mean_Values[j]=(int16_t)(Temp_Mean_Value>>7);
+		}
 		Temp_Mean_Value = 0;
 	}
 }

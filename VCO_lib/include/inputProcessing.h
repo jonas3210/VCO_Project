@@ -33,6 +33,7 @@ struct incrementState										//Structure that contains the variables that are 
 {
  bool isActivated;											//Key is activated(if there is a function to enable/disable it)
  bool lastStateA8;											//Last state(pressed/unpressed)
+ bool lastStateC8;
  bool actualStateA8;										//Actual state A8
  bool actualStateC8;										//Actual state C8
  int timeCount;												//Time that the increment sensor is locked
@@ -48,14 +49,37 @@ struct incrementKeyState									//Structure that contains the variables for the
  int timeHolded;											//Time the key was pressed
 };
 
+volatile bool holdActive;
+volatile bool linlogActive;
+volatile bool out1Active;
+volatile bool out2Active;
+volatile bool recActive;
 /*-------------------------------Exported macro---------------------------------*/
-//#define holdActive		gloablVariable					//hold active
-//#define linlogActive	gloablVariable						//lin or log mode active
-//#define out2Active		gloablVariable					//Output-Line 2 active
-//#define out1Active		gloablVariable					//Output-Line 1 active
-//#define recActive		gloablVariable						//rec mode active
-//#define bankValue											//Actual selected bank
-#define timeToSave 1000										//Time that the increment Key needs to be pressed to safe the actual settings to the displayed bank
+#define INPUT_BUTTON_HOLD holdActive
+#define INPUT_BUTTON_LINLOG linlogActive
+#define INPUT_BUTTON_OUT1 out1Active
+#define INPUT_BUTTON_OUT2 out2Active
+#define INPUT_BUTTON_REC recActive
+#define timeToSave 1000
+
+#define LED_HOLD_ON GPIO_ResetBits(GPIOD, GPIO_Pin_7)
+#define LED_HOLD_OFF GPIO_SetBits(GPIOD, GPIO_Pin_7)
+#define LED_LINLOG_ON GPIO_ResetBits(GPIOB, GPIO_Pin_4)
+#define LED_LINLOG_OFF GPIO_SetBits(GPIOB, GPIO_Pin_4)
+#define LED_REC_ON GPIO_ResetBits(GPIOD, GPIO_Pin_5)
+#define LED_REC_OFF GPIO_SetBits(GPIOD, GPIO_Pin_5)
+#define LED_SAVE_ON GPIO_ResetBits(GPIOE, GPIO_Pin_6)
+#define LED_SAVE_OFF GPIO_SetBits(GPIOE, GPIO_Pin_6)
+#define LED_SAVE_TOGGLE GPIO_ToggleBits(GPIOE, GPIO_Pin_6)
+#define LED_LOAD_ON GPIO_ResetBits(GPIOC, GPIO_Pin_13)
+#define LED_LOAD_OFF GPIO_SetBits(GPIOC, GPIO_Pin_13)
+#define LED_LOAD_TOGGLE GPIO_ToggleBits(GPIOC, GPIO_Pin_13)
+#define LED_ORIGIN_ON GPIO_ResetBits(GPIOE, GPIO_Pin_4)
+#define LED_ORIGIN_OFF GPIO_SetBits(GPIOE, GPIO_Pin_4)
+#define LED_OUT1_ON GPIO_ResetBits(GPIOD, GPIO_Pin_3)
+#define LED_OUT1_OFF GPIO_SetBits(GPIOD, GPIO_Pin_3)
+#define LED_OUT2_ON GPIO_ResetBits(GPIOD, GPIO_Pin_1)
+#define LED_OUT2_OFF GPIO_SetBits(GPIOD, GPIO_Pin_1)//Time that the increment Key needs to be pressed to safe the actual settings to the displayed bank
 
 /*-----------------------------Exported functions-------------------------------*/
 void inputProcessingInit(void);								//Initialisation

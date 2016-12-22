@@ -1,7 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dependencies>
    <includePath signature="/I..\..\..\workspace\VCO_Firmware_V0\VCO_lib\include /I..\..\..\workspace /I..\..\..\workspace\VCO_Firmware_V0\VCO_lib /I..\..\..\workspace\VCO_Firmware_V0\cmsis_lib /I..\..\.. /I..\..\..\workspace\VCO_Firmware_V0 /I..\..\..\workspace\VCO_Firmware_V0\cmsis_boot /I..\..\..\workspace\VCO_Firmware_V0\semihosting /I..\..\..\workspace\VCO_Firmware_V0\cmsis /I..\..\..\workspace\VCO_Firmware_V0\cmsis_lib\include">
-      <source file="..\..\..\VCO_lib\include\adc_multichannel_init.h" lastModified="158eb6c5c3d">
+      <source file="..\..\..\VCO_lib\include\wavetables.h" lastModified="1587e83e0d3">
+         <include file="..\..\..\VCO_lib\include\saw_tables.h"/>
+         <include file="..\..\..\VCO_lib\include\triangle_tables.h"/>
+         <include file="..\..\..\VCO_lib\include\rect_tables.h"/>
+      </source>
+      <source file="..\..\..\VCO_lib\include\adc_multichannel_init.h" lastModified="15918d7f260">
          <include file="..\..\..\VCO_lib\include\Global_Variables.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_adc.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h"/>
@@ -9,7 +14,7 @@
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
          <include file="..\..\..\VCO_lib\include\fixed_point.h"/>
       </source>
-      <source file="..\..\..\VCO_lib\source\debounceKey.c" lastModified="158c17ff3ea">
+      <source file="..\..\..\VCO_lib\source\debounceKey.c" lastModified="15912dd2a72">
          <include file="..\..\..\VCO_lib\include\debounceKey.h"/>
       </source>
       <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="1585fb849ce">
@@ -19,7 +24,7 @@
       <source file="..\..\..\cmsis_lib\include\stm32f4xx_syscfg.h" lastModified="1585fb849c9">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
       </source>
-      <source file="..\..\..\VCO_lib\include\inputProcessing.h" lastModified="158647487a9">
+      <source file="..\..\..\VCO_lib\include\inputProcessing.h" lastModified="159190bedb3">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
@@ -28,6 +33,9 @@
          <include file="..\..\..\VCO_lib\include\Global_Variables.h"/>
       </source>
       <source file="..\..\..\cmsis_lib\include\misc.h" lastModified="1585fb849c1">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\VCO_lib\include\stm32f4xx_flash.h" lastModified="132cae5d320">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
       </source>
       <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="1585fb849ca">
@@ -57,13 +65,16 @@
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_adc.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
       </source>
-      <source file="..\..\..\VCO_lib\source\inputProcessing.c" lastModified="1586475914b">
+      <source file="..\..\..\VCO_lib\source\inputProcessing.c" lastModified="1591910d09a">
          <include file="..\..\..\VCO_lib\include\inputProcessing.h"/>
       </source>
       <source file="..\..\..\cmsis_lib\include\stm32f4xx_adc.h" lastModified="1585fb849c2">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
       </source>
       <source file="..\..\..\VCO_lib\include\fixed_point.h" lastModified="1585fb84d90">
+      </source>
+      <source file="..\..\..\VCO_lib\source\saveBanks.c" lastModified="1591d940310">
+         <include file="..\..\..\VCO_lib\include\saveBanks.h"/>
       </source>
       <source file="..\..\..\cmsis\core_cmFunc.h" lastModified="1585fb85187">
       </source>
@@ -89,7 +100,11 @@
          <include file="..\..\..\cmsis_boot\system_stm32f4xx.h"/>
          <include file="..\..\..\cmsis_boot\stm32f4xx_conf.h"/>
       </source>
-      <source file="..\..\..\VCO_lib\source\adc_multichannel_init.c" lastModified="158eb6c0380">
+      <source file="..\..\..\VCO_lib\include\eeprom.h" lastModified="1587c71f9e7">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+         <include file="..\..\..\VCO_lib\include\stm32f4xx_flash.h"/>
+      </source>
+      <source file="..\..\..\VCO_lib\source\adc_multichannel_init.c" lastModified="15903799f2b">
          <include file="..\..\..\VCO_lib\include\adc_multichannel_init.h"/>
          <include file="..\..\..\VCO_lib\include\debounceKey.h"/>
       </source>
@@ -102,9 +117,27 @@
       <source file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h" lastModified="1585fb849c5">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
       </source>
+      <source file="..\..\..\VCO_lib\include\saw_tables.h" lastModified="1591daf55d6">
+      </source>
       <source file="..\..\..\cmsis_lib\source\stm32f4xx_i2c.c" lastModified="1585fb849cf">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\main.h" lastModified="159190793e2">
+         <include file="..\..\..\VCO_lib\include\Global_Variables.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_adc.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+         <include file="..\..\..\VCO_lib\include\stm32f4xx_flash.h"/>
+         <include file="..\..\..\VCO_lib\include\adc_multichannel_init.h"/>
+         <include file="..\..\..\VCO_lib\include\codec_configuration.h"/>
+         <include file="..\..\..\VCO_lib\include\inputProcessing.h"/>
+         <include file="..\..\..\VCO_lib\include\wavetables.h"/>
+         <include file="..\..\..\VCO_lib\include\fixed_point.h"/>
+         <include file="..\..\..\VCO_lib\include\sevenSegment.h"/>
+         <include file="..\..\..\VCO_lib\include\eeprom.h"/>
+         <include file="..\..\..\VCO_lib\include\saveBanks.h"/>
       </source>
       <source file="..\..\..\syscalls\syscalls.c" lastModified="1585fb85979">
       </source>
@@ -115,10 +148,11 @@
       <source file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h" lastModified="1585fb849c6">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
       </source>
-      <source file="..\..\..\cmsis_boot\stm32f4xx_conf.h" lastModified="1585fb8806f">
+      <source file="..\..\..\cmsis_boot\stm32f4xx_conf.h" lastModified="1585fb87c87">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_dac.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_exti.h"/>
+         <include file="..\..\..\VCO_lib\include\stm32f4xx_flash.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_pwr.h"/>
@@ -133,7 +167,19 @@
       </source>
       <source file="..\..\..\cmsis\core_cmInstr.h" lastModified="1585fb85188">
       </source>
-      <source file="..\..\..\VCO_lib\include\Global_Variables.h" lastModified="158eb6fa135">
+      <source file="..\..\..\main.c" lastModified="1591daa7f75">
+         <include file="..\..\..\main.h"/>
+      </source>
+      <source file="..\..\..\VCO_lib\include\saveBanks.h" lastModified="15919222e8a">
+         <include file="..\..\..\cmsis_lib\include\misc.h"/>
+         <include file="..\..\..\VCO_lib\include\eeprom.h"/>
+         <include file="..\..\..\VCO_lib\include\stm32f4xx_flash.h"/>
+         <include file="..\..\..\VCO_lib\include\Global_Variables.h"/>
+      </source>
+      <source file="..\..\..\VCO_lib\include\Global_Variables.h" lastModified="15918ff716b">
+      </source>
+      <source file="..\..\..\VCO_lib\source\eeprom.c" lastModified="132edac5a00">
+         <include file="..\..\..\VCO_lib\include\eeprom.h"/>
       </source>
       <source file="..\..\..\VCO_lib\source\codec_configuration.c" lastModified="158e4b3c0ae">
          <include file="..\..\..\VCO_lib\include\codec_configuration.h"/>
@@ -146,6 +192,11 @@
       </source>
       <source file="..\..\..\semihosting\semihosting.c" lastModified="1585fb851a6">
          <include file="..\..\..\semihosting\semihosting.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_flash.c" lastModified="15918c756d3">
+         <include file="..\..\..\VCO_lib\include\stm32f4xx_flash.h"/>
+      </source>
+      <source file="..\..\..\VCO_lib\include\rect_tables.h" lastModified="1591db4f67a">
       </source>
       <source file="..\..\..\VCO_lib\include\codec_configuration.h" lastModified="1585fb84d8f">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
@@ -165,12 +216,14 @@
       </source>
       <source file="..\..\..\cmsis_boot\system_stm32f4xx.h" lastModified="1585fb849c0">
       </source>
+      <source file="..\..\..\VCO_lib\source\sevenSegment.c" lastModified="15912e312a0">
+         <include file="..\..\..\VCO_lib\include\sevenSegment.h"/>
+      </source>
       <source file="..\..\..\cmsis_lib\source\stm32f4xx_tim.c" lastModified="1585fb849d4">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
       </source>
-      <source file="..\..\..\VCO_lib\source\sevenSegment.c" lastModified="158e5532cbe">
-         <include file="..\..\..\VCO_lib\include\sevenSegment.h"/>
+      <source file="..\..\..\VCO_lib\include\triangle_tables.h" lastModified="1591db4ee23">
       </source>
       <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="1585fb849b9">
       </source>

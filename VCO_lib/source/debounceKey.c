@@ -82,6 +82,7 @@ void debounceKeyInit(void)
 /**
  * This function gets executed when the Timer 7 sents an Interrupt, it debounces the Keys that have been pressed
  */
+/*
 void TIM7_IRQHandler(void)
 {
 	static struct keyState inputKeys[5];
@@ -114,3 +115,4 @@ void TIM7_IRQHandler(void)
 	TIM_ClearITPendingBit(TIM7, TIM_IT_Update);
 
 }
+*/
