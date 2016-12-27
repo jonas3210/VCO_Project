@@ -38,7 +38,7 @@ void inputProcessingInit(void)
 	GPIO_Init(GPIOD, &GPIO_InitStructure);
 
 	// Config PA 8,14  as Digital Input
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_0;					//Vorerst der OnBoard-Taster
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_15;//GPIO_Pin_0;					//Vorerst der OnBoard-Taster
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -90,7 +90,7 @@ void inputProcessingInit(void)
  */
 void TIM7_IRQHandler(void)
 {
-	static struct keyState inputKeys[5];
+	static struct keyState inputKeys[BUTTON_AMOUNT];
 	static struct incrementState incrementGiver;
 	static struct incrementKeyState incrementKey;
 	int i = 0;
@@ -101,8 +101,9 @@ void TIM7_IRQHandler(void)
 	inputKeys[2].actualState = GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_0);
 	inputKeys[3].actualState = GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_2);
 	inputKeys[4].actualState = GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_6);
+	inputKeys[5].actualState = GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_15);
 
-	for (i=0;i<5;i++)
+	for (i=0;i<BUTTON_AMOUNT;i++)
 	{
 	 inputKeys[i].gotPressed = 0;
 	 if(inputKeys[i].timeCount > 0)																				//Key Locked ? =>  lower Time locked
@@ -122,6 +123,7 @@ void TIM7_IRQHandler(void)
 	out2Active = inputKeys[2].gotPressed ^ out2Active;
 	out1Active = inputKeys[3].gotPressed ^ out1Active;
 	recActive = inputKeys[4].gotPressed ^ recActive;
+	encoderActive = inputKeys[5].gotPressed ^ encoderActive;
 
 	//Function-Part to debounce and evaluate the increment sensor
 
@@ -150,9 +152,11 @@ void TIM7_IRQHandler(void)
 					sevenSegmentIntToDisplay(Bank_Value);
 				}
 				else{
-					Load_Save_Flag ^= 1;
-					LED_SAVE_TOGGLE;
-					LED_LOAD_TOGGLE;
+					Save_Load_Exit_Value--;
+					if(Save_Load_Exit_Value < 0){
+						Save_Load_Exit_Value = 2;
+					}
+					Menu_Status = (Menu_Select)Save_Load_Exit_Value;
 				}
 													//Changed Bankvalue gets displayed on seven segment display
 			}
@@ -174,9 +178,11 @@ void TIM7_IRQHandler(void)
 					sevenSegmentIntToDisplay(Bank_Value);
 				}
 				else{
-					Load_Save_Flag ^= 1;
-					LED_SAVE_TOGGLE;
-					LED_LOAD_TOGGLE;
+					Save_Load_Exit_Value++;
+					if(Save_Load_Exit_Value >2){
+						Save_Load_Exit_Value = 0;
+					}
+					Menu_Status = (Menu_Select)Save_Load_Exit_Value;
 				}
 														//Changed Bankvalue gets displayed on seven segment display
 			}
@@ -206,7 +212,7 @@ void TIM7_IRQHandler(void)
 			incrementKey.timeCount = 15;
 			if(incrementKey.timeHolded >= timeToSave)
 			{
-				GPIO_ToggleBits(GPIOD,GPIO_Pin_15);																//Save Bank
+				//GPIO_ToggleBits(GPIOD,GPIO_Pin_15);																//Save Bank
 				incrementKey.stateChanged = 0;
 			}
 		}
@@ -215,7 +221,7 @@ void TIM7_IRQHandler(void)
 			incrementKey.stateChanged = 0;
 			if(incrementKey.timeHolded < timeToSave)
 			{
-				GPIO_ToggleBits(GPIOD,GPIO_Pin_12); //Bank auswählen											//choose bank
+				//GPIO_ToggleBits(GPIOD,GPIO_Pin_12); //Bank auswählen											//choose bank
 			}
 		}
 	}

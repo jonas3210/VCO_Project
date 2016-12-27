@@ -60,6 +60,13 @@ typedef struct{
 	bool Audio_Lock;
 }Parameter_Lock;
 
+typedef enum {
+	Save,
+	Load,
+	Exit,
+
+}Menu_Select;
+
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions --------------------------------------------------------*/
@@ -68,8 +75,12 @@ typedef struct{
 VCO VCO1;//Struct for VCO1 Parameters
 VCO VCO2;//Struct for VCO2 Parameters
 
+VCO VCO_Temp;
+
 Parameter_Lock VCO1_Lock;//Struct for Pot Lock Values of VCO1
 Parameter_Lock VCO2_Lock;//Struct for Pot Lock Values of VCO2
+
+Menu_Select Menu_Status; //Selected Menu Function
 
 volatile int16_t VCO1_Output_Buffer [I2S_BUFFERSIZE/2];//Output Buffer Channel1
 volatile int16_t VCO2_Output_Buffer [I2S_BUFFERSIZE/2];//Output Buffer Channel2
@@ -80,6 +91,6 @@ volatile int16_t i2s_Out[I2S_BUFFERSIZE];//I2S Output Buffer
 volatile uint8_t Transfer_Complete_Flag;//Flag for I2S Transmission finished -> Start point of wave calculation
 volatile bool Save_Flag;
 volatile bool Menu_Flag;
-volatile bool Load_Save_Flag;
+volatile int8_t Save_Load_Exit_Value;
 volatile uint8_t Bank_Value;//Actual Bank Value
 #endif /* __GLOBAL_VARIABLES_H */

@@ -54,13 +54,19 @@ volatile bool linlogActive;
 volatile bool out1Active;
 volatile bool out2Active;
 volatile bool recActive;
+volatile bool encoderActive;
+
+
 /*-------------------------------Exported macro---------------------------------*/
+#define BUTTON_AMOUNT 6
+
 #define INPUT_BUTTON_HOLD holdActive
 #define INPUT_BUTTON_LINLOG linlogActive
 #define INPUT_BUTTON_OUT1 out1Active
 #define INPUT_BUTTON_OUT2 out2Active
 #define INPUT_BUTTON_REC recActive
-#define timeToSave 1000
+#define INPUT_BUTTON_ENCODER encoderActive
+#define timeToSave 3000
 
 #define LED_HOLD_ON GPIO_ResetBits(GPIOD, GPIO_Pin_7)
 #define LED_HOLD_OFF GPIO_SetBits(GPIOD, GPIO_Pin_7)
