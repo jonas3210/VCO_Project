@@ -11,7 +11,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "adc_multichannel_init.h"
-#include "debounceKey.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -54,7 +53,7 @@ void ADC1_Poti_Init(void){
 	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1;//Select Channel 8-9
 	GPIO_Init(GPIOB, &GPIO_InitStruct);//load setted values to Hardwareregister
 
-	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2;//Select Channel 11-12
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_4;//Select Channel 11-12
 	GPIO_Init(GPIOC, &GPIO_InitStruct);//load setted values to Hardwareregister
 
 	//********************************************************
@@ -111,6 +110,7 @@ void ADC1_Poti_Init(void){
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_9, 5, ADC_SampleTime_480Cycles);//PB1
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_11, 6, ADC_SampleTime_480Cycles);//PC1
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 7, ADC_SampleTime_480Cycles);//PC2
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_14, 8, ADC_SampleTime_480Cycles);//PC2
 
 	ADC_DMARequestAfterLastTransferCmd(ADC1,ENABLE);// Enable DMA request after last transfer
 
@@ -136,7 +136,8 @@ void Get_ADC_Values(void){
 	for(int i=0; i<CHANNEL_AMOUNT;i++){
 		ADC_Differences[i]= fabs((ADC_Buffer[i]>>4)-ADC_Values[i]);
 		if(ADC_Differences[i]>ADC_VALUE_CHANGE_THRESHOLD){
-			ADC_Values[i]=(ADC_Buffer[i]>>4);
+			ADC_Values[i]=(int16_t)((ADC_Buffer[i]>>4) * 1.087);
+			if(ADC_Values[i] > 4095)ADC_Values[i] = 4095;
 		}
 	}
 }
@@ -159,11 +160,12 @@ Parameter_Lock Get_Lock_Values(Parameter_Lock VCO_Temp_Lock){
 					break;
 			case 3: VCO_Temp_Lock.Mix_Lock = false;
 					break;
-			case 4: VCO_Temp_Lock.FM_Lock = false;
-					break;
+			case 4: break;
 			case 5: VCO_Temp_Lock.Freq_Fine_Lock = false;
 					break;
 			case 6: VCO_Temp_Lock.Freq_Lock = false;
+					break;
+			case 7: VCO_Temp_Lock.FM_Lock = false;
 					break;
 			default: break;
 			}

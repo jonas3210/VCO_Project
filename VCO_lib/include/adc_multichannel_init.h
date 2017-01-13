@@ -32,6 +32,7 @@
 #define INPUT_PHASE_VALUE ADC_Values[0]
 #define INPUT_FREQUENCY_COARSE_VALUE ADC_Values[6]
 #define INPUT_WAVESHAPE_VALUE ADC_Values[2]
+#define INPUT_FM_MIX_VALUE ADC_Values[7]
 //ADC Input Mean Values
 #define INPUT_FREQUENCY_FINE_MEAN_VALUE ADC_Mean_Values[5]
 #define INPUT_AUDIO_MEAN_VALUE ADC_Mean_Values[1]
@@ -40,16 +41,38 @@
 #define INPUT_PHASE_MEAN_VALUE ADC_Mean_Values[0]
 #define INPUT_FREQUENCY_COARSE_MEAN_VALUE ADC_Mean_Values[6]
 #define INPUT_WAVESHAPE_MEAN_VALUE ADC_Mean_Values[2]
+#define INPUT_FM_MIX_MEAN_VALUE ADC_Mean_Values[7]
 
 #define ADC_VALUE_CHANGE_THRESHOLD 2 //Defines noise Level of Inputs for stable ADC Values
-#define ADC_MEAN_VALUE_CHANGE_THRESHOLD 10 //Defines noise Level of Inputs for stable ADC Values
+#define ADC_MEAN_VALUE_CHANGE_THRESHOLD 11 //Defines noise Level of Inputs for stable ADC Values
 #define LOCK_THRESHOLD 10//Defines necessary value change for unlock parameter
 //Amount of ADC-Channels
-#define CHANNEL_AMOUNT 7
+#define CHANNEL_AMOUNT 8
 
 #define ADC_RESOLUTION 4096
 
 #define MEAN_SIZE 128 //Number of Values for floating mean
+
+#define ADC_FREQ_CORRECTION_FACTOR 1.072
+#define ADC_FREQ__FINE_CORRECTION_FACTOR 1.039
+#define ADC_PHASE_CORRECTION_FACTOR 1.072
+#define ADC_SHAPE_CORRECTION_FACTOR 1.087
+#define ADC_MIX_CORRECTION_FACTOR 1.07
+#define ADC_FM_CORRECTION_FACTOR 1
+#define ADC_FM_MIX_CORRECTION_FACTOR 1
+#define ADC_AUDIO_CORRECTION_FACTOR 1
+
+volatile int ADC_Correction_Factor[CHANNEL_AMOUNT];
+
+		/*
+		ADC_PHASE_CORRECTION_FACTOR,
+		ADC_AUDIO_CORRECTION_FACTOR,
+		ADC_SHAPE_CORRECTION_FACTOR,
+		ADC_MIX_CORRECTION_FACTOR,
+		ADC_FM_CORRECTION_FACTOR,
+		ADC_FREQ__FINE_CORRECTION_FACTOR,
+		ADC_FREQ_CORRECTION_FACTOR,
+		ADC_FM_MIX_CORRECTION_FACTOR*/
 
 volatile uint16_t Input_Mean_Buffer[CHANNEL_AMOUNT][MEAN_SIZE];
 
@@ -60,6 +83,9 @@ volatile uint16_t ADC_Buffer[CHANNEL_AMOUNT];//ADC Buffer with control input val
 volatile uint16_t ADC_Values[CHANNEL_AMOUNT];//ADC Values after Stabilization
 volatile uint16_t ADC_Differences[CHANNEL_AMOUNT];// ADC Value differences to last Value
 volatile uint16_t ADC_Mean_Differences[CHANNEL_AMOUNT];// ADC Value differences to last Value
+
+
+
 
 /* Exported functions ------------------------------------------------------- */
 

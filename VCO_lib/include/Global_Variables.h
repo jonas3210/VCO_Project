@@ -37,6 +37,8 @@
 #define CV_FACTOR_2 0.0024420024//0.0097751712//10/(ADC_RESOLUTION-1)
 #define PI 3.14159265359
 
+#define BLINK_FREQUENCY 500//Blink "Frequency" for Output LEDs
+
 /* Exported types ------------------------------------------------------------*/
 typedef struct{
 	//int16_t Output_Buffer[I2S_BUFFERSIZE/2];//Output Buffer Channel1
@@ -92,5 +94,6 @@ volatile uint8_t Transfer_Complete_Flag;//Flag for I2S Transmission finished -> 
 volatile bool Save_Flag;
 volatile bool Menu_Flag;
 volatile int8_t Save_Load_Exit_Value;
-volatile uint8_t Bank_Value;//Actual Bank Value
+volatile uint8_t Bank_Value;//Actual Bank Valueu
+volatile bool Blink_Flag;
 #endif /* __GLOBAL_VARIABLES_H */

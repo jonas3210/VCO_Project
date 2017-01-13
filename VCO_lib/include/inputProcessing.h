@@ -20,12 +20,22 @@
 #include "Global_Variables.h"
 
 /*-------------------------------Exported variables-----------------------------*/
+
+typedef enum {
+	Off,
+	Passive,
+	Active,
+
+}Output_Status;
+
 struct keyState												//Structure that contains the variables that are needed to debounce a key
 {
  bool isActivated;											//Key is activated(if there is a function to enable/disable it)
  bool lastState;											//Last state(pressed/unpressed)
  bool actualState;											//Actual state
  bool gotPressed;											//Key was Pressed ?
+ bool gotHolded;
+ int timeHolded;
  int timeCount;												//Time that the Key is locked
 };
 
@@ -55,6 +65,11 @@ volatile bool out1Active;
 volatile bool out2Active;
 volatile bool recActive;
 volatile bool encoderActive;
+volatile bool out1Off;
+volatile bool out2Off;
+
+volatile Output_Status Output1;
+volatile Output_Status Output2;
 
 
 /*-------------------------------Exported macro---------------------------------*/
@@ -66,7 +81,9 @@ volatile bool encoderActive;
 #define INPUT_BUTTON_OUT2 out2Active
 #define INPUT_BUTTON_REC recActive
 #define INPUT_BUTTON_ENCODER encoderActive
-#define timeToSave 3000
+#define HOLD_TIME 1000
+#define timeToSave 1000
+#define DEBOUNCE_TIME 50
 
 #define LED_HOLD_ON GPIO_ResetBits(GPIOD, GPIO_Pin_7)
 #define LED_HOLD_OFF GPIO_SetBits(GPIOD, GPIO_Pin_7)
@@ -84,9 +101,10 @@ volatile bool encoderActive;
 #define LED_ORIGIN_OFF GPIO_SetBits(GPIOE, GPIO_Pin_4)
 #define LED_OUT1_ON GPIO_ResetBits(GPIOD, GPIO_Pin_3)
 #define LED_OUT1_OFF GPIO_SetBits(GPIOD, GPIO_Pin_3)
+#define LED_OUT1_TOGGLE GPIO_ToggleBits(GPIOD, GPIO_Pin_3)
 #define LED_OUT2_ON GPIO_ResetBits(GPIOD, GPIO_Pin_1)
 #define LED_OUT2_OFF GPIO_SetBits(GPIOD, GPIO_Pin_1)//Time that the increment Key needs to be pressed to safe the actual settings to the displayed bank
-
+#define LED_OUT2_TOGGLE GPIO_ToggleBits(GPIOD, GPIO_Pin_1)
 /*-----------------------------Exported functions-------------------------------*/
 void inputProcessingInit(void);								//Initialisation
 void TIM7_IRQHandler(void);									//Interrupt-Function

@@ -82,6 +82,9 @@ void inputProcessingInit(void)
  	Bank_Value = 0;
  	sevenSegmentIntToDisplay(Bank_Value);
 
+ 	Output1 = Off;
+ 	Output2 = Off;
+
 
 }
 
@@ -95,6 +98,14 @@ void TIM7_IRQHandler(void)
 	static struct incrementKeyState incrementKey;
 	int i = 0;
 
+	//Generate Blink Frequency for Output LEDs
+	static int16_t Blink_Counter = 0;
+	Blink_Counter++;
+	if(Blink_Counter >= BLINK_FREQUENCY){
+		Blink_Flag = 1;
+		Blink_Counter = 0;
+	}
+
 	//Function-Part to debounce the five input keys
 	inputKeys[0].actualState = GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_3);											//Read the Keys and save the actual state
 	inputKeys[1].actualState = GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_5);
@@ -105,25 +116,44 @@ void TIM7_IRQHandler(void)
 
 	for (i=0;i<BUTTON_AMOUNT;i++)
 	{
-	 inputKeys[i].gotPressed = 0;
-	 if(inputKeys[i].timeCount > 0)																				//Key Locked ? =>  lower Time locked
-	 {
-		 inputKeys[i].timeCount--;
-	 }
-	 if((inputKeys[i].lastState == 1) && (inputKeys[i].actualState == 0) && (inputKeys[i].timeCount == 0))		//Falling edge and key unlocked
-	 {
-		 inputKeys[i].gotPressed = 1;																			//Set key pressed
-		 inputKeys[i].timeCount = 15;																			//Lock key for xms
-	 }
-	 inputKeys[i].lastState = inputKeys[i].actualState;
+		inputKeys[i].gotPressed = 0;
+		inputKeys[i].gotHolded = 0;
+		if(inputKeys[i].timeCount > 0)																				//Key Locked ? =>  lower Time locked
+		{
+			inputKeys[i].timeCount--;
+		}
+		else{
+			if((inputKeys[i].lastState == 1) && (inputKeys[i].actualState == 0))		//Falling edge and key unlocked
+			{
+				inputKeys[i].gotPressed = 1;																			//Set key pressed
+				inputKeys[i].timeCount = DEBOUNCE_TIME;		//Lock key for xms
+				inputKeys[i].timeHolded = 0;
+			}
+			else if((inputKeys[i].lastState == 0) && (inputKeys[i].actualState == 0)){
+				inputKeys[i].timeHolded++;
+				if(inputKeys[i].timeHolded >= HOLD_TIME){
+					inputKeys[i].gotHolded = 1;
+				}
+			}
+		}
+	 	inputKeys[i].lastState = inputKeys[i].actualState;
 	}
 
 	holdActive = inputKeys[0].gotPressed ^ holdActive;														//If Key was pressed Toggle State
 	linlogActive = inputKeys[1].gotPressed ^ linlogActive;
-	out2Active = inputKeys[2].gotPressed ^ out2Active;
-	out1Active = inputKeys[3].gotPressed ^ out1Active;
+	if(inputKeys[2].gotHolded){
+		Output2 = Off;
+	}
+	else if((Output2 == Active) && inputKeys[2].gotPressed) Output2 = Passive;
+	else if((!(Output2 == Active)) && inputKeys[2].gotPressed) Output2 = Active;
+	if(inputKeys[3].gotHolded){
+		Output1 = Off;
+	}
+	else if((Output1 == Active) && inputKeys[3].gotPressed) Output1 = Passive;
+	else if((!(Output1 == Active)) && inputKeys[3].gotPressed) Output1 = Active;
 	recActive = inputKeys[4].gotPressed ^ recActive;
 	encoderActive = inputKeys[5].gotPressed ^ encoderActive;
+
 
 	//Function-Part to debounce and evaluate the increment sensor
 
@@ -137,7 +167,7 @@ void TIM7_IRQHandler(void)
 		incrementGiver.actualStateC8 = GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_8);
 		if(((incrementGiver.lastStateA8 == 1) && (incrementGiver.actualStateA8 == 0)))
 		{																										//a lower bank is displayed/choosed
-			incrementGiver.timeCount = 10;																		//if it is turned right a higher bank is choosed
+			incrementGiver.timeCount = DEBOUNCE_TIME;																		//if it is turned right a higher bank is choosed
 			if(incrementGiver.actualStateC8 == 1)
 			{
 				if(!Menu_Flag){
@@ -163,7 +193,7 @@ void TIM7_IRQHandler(void)
 		}
 		if(((incrementGiver.lastStateC8 == 1) && (incrementGiver.actualStateC8 == 0)))
 		{																										//a lower bank is displayed/choosed
-			incrementGiver.timeCount = 10;																		//if it is turned right a higher bank is choosed
+			incrementGiver.timeCount = DEBOUNCE_TIME;																		//if it is turned right a higher bank is choosed
 			if(incrementGiver.actualStateA8 == 1)
 			{
 				if(!Menu_Flag){
@@ -203,13 +233,13 @@ void TIM7_IRQHandler(void)
 		if((incrementKey.lastState == 0) && (incrementKey.actualState == 1))									//there was a status change
 		{
 			incrementKey.stateChanged = 1;
-			incrementKey.timeCount = 15;
+			incrementKey.timeCount = DEBOUNCE_TIME;
 			incrementKey.timeHolded = 0;
 		}
 		if((incrementKey.lastState == 1) && (incrementKey.actualState == 1) && (incrementKey.stateChanged ==1))	//the button was holded for timeToSave
 		{
 			incrementKey.timeHolded = incrementKey.timeHolded + 10;
-			incrementKey.timeCount = 15;
+			incrementKey.timeCount = DEBOUNCE_TIME;
 			if(incrementKey.timeHolded >= timeToSave)
 			{
 				//GPIO_ToggleBits(GPIOD,GPIO_Pin_15);																//Save Bank

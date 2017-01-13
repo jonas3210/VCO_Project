@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\workspace\VCO_Firmware_V0\VCO_lib\include -I..\..\..\workspace -I..\..\..\workspace\VCO_Firmware_V0\VCO_lib -I..\..\..\workspace\VCO_Firmware_V0\cmsis_lib -I..\..\.. -I..\..\..\workspace\VCO_Firmware_V0 -I..\..\..\workspace\VCO_Firmware_V0\cmsis_boot -I..\..\..\workspace\VCO_Firmware_V0\semihosting -I..\..\..\workspace\VCO_Firmware_V0\cmsis -I..\..\..\workspace\VCO_Firmware_V0\cmsis_lib\include">
-      <target file="inputProcessing.o" lastModified="159407c6737">
-         <source file="..\..\..\VCO_lib\source\inputProcessing.c" lastModified="159407c56c8"/>
+      <target file="inputProcessing.o" lastModified="159854d3ee3">
+         <source file="..\..\..\VCO_lib\source\inputProcessing.c" lastModified="159854d2538"/>
       </target>
       <target file="stm32f4xx_exti.o" lastModified="158c16ac93e">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_exti.c" lastModified="1585fb849cd"/>
@@ -40,29 +40,29 @@
       <target file="stm32f4xx_spi.o" lastModified="158c16ac829">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_spi.c" lastModified="1585fb849d2"/>
       </target>
-      <target file="sevenSegment.o" lastModified="15912e32176">
-         <source file="..\..\..\VCO_lib\source\sevenSegment.c" lastModified="15912e312a0"/>
+      <target file="sevenSegment.o" lastModified="159846d351f">
+         <source file="..\..\..\VCO_lib\source\sevenSegment.c" lastModified="1594fa97f33"/>
       </target>
       <target file="stm32f4xx_rcc.o" lastModified="158c16ac272">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="1585fb849d1"/>
       </target>
-      <target file="eeprom.o" lastModified="1593d0eaba4">
+      <target file="eeprom.o" lastModified="15945f99d76">
          <source file="..\..\..\VCO_lib\source\eeprom.c" lastModified="132edac5a00"/>
       </target>
       <target file="stm32f4xx_pwr.o" lastModified="158c16abc2c">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_pwr.c" lastModified="1585fb849d0"/>
       </target>
+      <target file="saveBanks.o" lastModified="1597f6522f3">
+         <source file="..\..\..\VCO_lib\source\saveBanks.c" lastModified="15945877770"/>
+      </target>
       <target file="stm32f4xx_dac.o" lastModified="158c16abcb8">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_dac.c" lastModified="1585fb849cc"/>
       </target>
-      <target file="saveBanks.o" lastModified="159407c6804">
-         <source file="..\..\..\VCO_lib\source\saveBanks.c" lastModified="1593d1dea1a"/>
+      <target file="sh_cmd.o" lastModified="158c16ac540">
+         <source file="..\..\..\semihosting\sh_cmd.s" lastModified="1585fb849d7"/>
       </target>
       <target file="syscalls.o" lastModified="158c16ac66c">
          <source file="..\..\..\syscalls\syscalls.c" lastModified="1585fb849d9"/>
-      </target>
-      <target file="sh_cmd.o" lastModified="158c16ac540">
-         <source file="..\..\..\semihosting\sh_cmd.s" lastModified="1585fb849d7"/>
       </target>
       <target file="stm32f4xx_i2c.o" lastModified="158c16ac8c7">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_i2c.c" lastModified="1585fb849cf"/>
@@ -70,14 +70,14 @@
       <target file="semihosting.o" lastModified="158c16abb09">
          <source file="..\..\..\semihosting\semihosting.c" lastModified="1585fb849d6"/>
       </target>
-      <target file="adc_multichannel_init.o" lastModified="159407c68d8">
-         <source file="..\..\..\VCO_lib\source\adc_multichannel_init.c" lastModified="15903799f2b"/>
+      <target file="adc_multichannel_init.o" lastModified="1598540c7cc">
+         <source file="..\..\..\VCO_lib\source\adc_multichannel_init.c" lastModified="1597ecab4fa"/>
       </target>
-      <target file="codec_configuration.o" lastModified="159407c9b2d">
+      <target file="codec_configuration.o" lastModified="1597f651de2">
          <source file="..\..\..\VCO_lib\source\codec_configuration.c" lastModified="158e4b3c0ae"/>
       </target>
-      <target file="main.o" lastModified="159409a370c">
-         <source file="..\..\..\main.c" lastModified="159409a2fe9"/>
+      <target file="main.o" lastModified="159854d3dc7">
+         <source file="..\..\..\main.c" lastModified="159852a1f7a"/>
       </target>
    </processor>
 </history>
